@@ -143,8 +143,8 @@ const Files = () => {
             </span>
 
             {/* Icon column */}
-            <span className="file-icon">
-              {file.type === "Folder" ? <RiFolderZipFill /> : <FaFile />}
+            <span className="file-icon px-1">
+              {file.type === "Folder" ? <img src="./folder.png" alt="folder" /> : <img src="./file.png" alt="file"/>}
             </span>
 
             {/* Name */}

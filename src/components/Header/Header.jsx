@@ -16,8 +16,9 @@ const Header = () => {
         <span className="logo-text">Logo</span>
 
         <div className="header-right">
-          <button className="icon-btn"><FaFolder size={20} /></button>
+          <button className="icon-btn"><img src="./kanbase.png" height={20} width={20} /></button>
           <button className="icon-btn"><RiSearchLine size={20} /></button>
+          <button className="icon-btn"><FaFolder size={20} /></button>
           <button className="icon-btn"><FaImage size={20} /></button>
           <button className="icon-btn"><BiSolidZap size={20} /></button>
           <button className="icon-btn"><IoMdMail size={20} /></button>
