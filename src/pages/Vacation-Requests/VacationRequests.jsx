@@ -16,6 +16,7 @@ import {
 import { useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { HiUserAdd } from "react-icons/hi";
+import { MdMenuOpen } from "react-icons/md";
 import { PiPlugsConnectedFill } from "react-icons/pi";
 import { RiMenuAddFill } from "react-icons/ri";
 import { TbTableOptions } from "react-icons/tb";
@@ -103,6 +104,7 @@ const VacationRequests = () => {
                 {/* Page Header */}
                 <div className="bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
                     <div className="flex items-center gap-2">
+                        <MdMenuOpen size={30} />
                         <span className="text-2xl sm:text-4xl">🏝️</span>
                         <h1 className="text-xl sm:text-2xl lg:text-3xl text-gray-900 truncate">
                             Vacation requests
@@ -416,7 +418,7 @@ const VacationRequests = () => {
                                 <span className="font-medium">Ownership:</span>
                                 <span className="flex items-center gap-2 bg-gray-200 py-1 px-2 rounded-full">
                                     <img
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFuLZe9UHs6cC_sIBZ8HIqkTg4ADomTdWBcQ&s"
+                                        src="https://mockmind-api.uifaces.co/content/human/80.jpg"
                                         className="h-5 w-5 rounded-full"
                                         alt="avatar"
                                     />
@@ -429,11 +431,11 @@ const VacationRequests = () => {
                         </div>
 
                         <div className="flex border-b border-gray-200 mb-4">
-                            <button className="px-4 py-2 text-lg border-b-4 font-bold border-blue-800 flex flex-col justify-center items-center gap-2">
+                            <button className="px-4 py-2 border-b-4 font-bold border-blue-800 flex flex-col justify-center items-center gap-2">
                                 <HiUserAdd fill="black" size={25} />
                                 Sharing
                             </button>
-                            <button className="px-4 py-2 text-lg font-medium flex flex-col justify-center items-center gap-2">
+                            <button className="px-4 py-2 font-medium flex flex-col justify-center items-center gap-2">
                                 <PiPlugsConnectedFill size={25} fill="black" />
                                 Integration
                             </button>

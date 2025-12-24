@@ -44,11 +44,11 @@ const RightPanel = ({ selectedFiles }) => {
   return (
     <aside className="right-panel">
       {/* ===== HEADER ===== */}
-      <div className="panel-header">
+      <div className="panel-header flex items-start">
         <div>
           <h3>{file.name}</h3>
           <p className="meta flex items-center gap-1">
-            <BsStarFill /> {file.size} · {file.modified} · Owner <strong className="name_bg">Christine...</strong>
+            <BsStarFill /> {file.size} · {file.modified} · Owner <strong className="name_bg flex gap-1 items-center"><img src="https://mockmind-api.uifaces.co/content/human/80.jpg" className="h-5 w-5 rounded-full" alt="avatar" />Christine...</strong>
           </p>
         </div>
         <div className="header-actions flex items-center gap-2"><Ellipsis /> <X /></div>
@@ -164,7 +164,9 @@ const RightPanel = ({ selectedFiles }) => {
 
         {/* PERMISSIONS */}
         <div className="permissions">
-          <span className="team flex items-center gap-1"><FaUserFriends size={20} /> Team folder</span>
+          <span className="team flex items-center gap-1"><span className="bg-[#065e9a] p-2 rounded-full flex justify-center items-center">
+            <FaUserFriends color="white" size={20} /> 
+            </span>Team folder</span>
           <div className="perm-list">
             {PERMISSIONS.map((p) => (
               <span key={p}>{p}</span>

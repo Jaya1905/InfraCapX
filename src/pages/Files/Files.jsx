@@ -4,7 +4,7 @@ import { FILES_DATA } from "../../utils/constants";
 import RightPanel from "../../components/RightPanel/RightPanel";
 import "./files.css";
 import { GoFileDirectoryFill } from "react-icons/go";
-import { MdOutlineInsertLink } from "react-icons/md";
+import { MdMenuOpen, MdOutlineInsertLink } from "react-icons/md";
 import { FaAngleRight, FaFile, FaRegCalendarAlt } from "react-icons/fa";
 import { HiUserAdd, HiUsers } from "react-icons/hi";
 import { RiFolderZipFill } from "react-icons/ri";
@@ -41,7 +41,9 @@ const Files = () => {
       {/* Files Content */}
       <div className="flex-1 files-page">
         {/* 🔹 Breadcrumb + New */}
-        <div className="breadcrumb-row">
+        <div className="breadcrumb-row gap-5">
+          <MdMenuOpen size={30} />
+
           <div className="breadcrumb">
             <span className="crumb folder">
               <GoFileDirectoryFill />
@@ -54,19 +56,19 @@ const Files = () => {
             <span className="link-icon">
               <MdOutlineInsertLink size={20} />
             </span>
+            <button className="new-btn flex items-center gap-1">
+              <BiPlus /> New
+            </button>
           </div>
 
-          <button className="new-btn flex items-center gap-1">
-            <BiPlus /> New
-          </button>
         </div>
 
         {/* 🔹 Info */}
         <div className="folder-info">
-          <p className="managed-by">
+          <p className="managed-by flex items-center gap-1">
             Virtual Annual Conference managed by
-            <span className="user user1"> Christine Schott</span> and
-            <span className="user user2"> Ros Christy</span>
+            <span className="user user1 flex justify-center items-center w-fit gap-1"><img src="https://mockmind-api.uifaces.co/content/human/80.jpg" className="h-5 w-5 rounded-full" alt="avatar" /> Christine Schott</span> and
+            <span className="user user2 flex justify-center items-center w-fit gap-1"><img src="https://mockmind-api.uifaces.co/content/human/125.jpg" className="h-5 w-5 rounded-full" alt="avatar" /> Ros Christy</span>
           </p>
 
           <p className="description">
