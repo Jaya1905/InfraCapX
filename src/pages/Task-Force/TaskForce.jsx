@@ -1,303 +1,222 @@
-import { X } from "lucide-react";
+import { X, Users } from "lucide-react";
 import { useState } from "react";
 
 const TaskForce = () => {
   const [formData, setFormData] = useState({
     title: "",
-    type: "Users and groups",
     description: "",
-    mandatory: false,
-    showUserStatus: false,
-    selectMultipleItems: false,
-    addColumnToOtherViews: "Column",
+    type: "Users and groups",
     users: true,
     groups: true,
     teams: true,
     defaultValue: "Internal Project Team",
+    mandatory: false,
+    selectMultipleItems: false,
+    showUserStatus: false,
+    addColumnToOtherViews: "Column",
+    addMore: false
   });
 
-  const [addMore, setAddMore] = useState(false);
-
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleToggle = (field) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: !prev[field],
-    }));
-  };
-
-  const handleSave = () => {
-    console.log("Form data:", formData);
-    // Handle save logic here
-  };
-
-  const handleClose = () => {
-    // Handle close logic here
-    console.log("Form closed");
-  };
+  const toggle = (key) =>
+    setFormData((p) => ({ ...p, [key]: !p[key] }));
 
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Page Header */}
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="border-gray-200 px-6 py-4">
           <div className="flex items-center gap-2">
             <span className="text-2xl">📋</span>
-            <h1 className="text-2xl font-medium text-gray-900">Task force</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Task force</h1>
           </div>
         </div>
-
-        {/* Form Content */}
-        <div className="flex-1 flex items-center justify-center p-6">
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
-              <h2 className="text-lg font-medium text-gray-900">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          {/* Modal */}
+          <div className="bg-white w-[1000px] rounded-lg shadow-xl overflow-hidden">
+            
+            {/* Header */}
+            <div className="relative flex items-center px-6 py-4">
+              {/* Center title */}
+              <h2 className="absolute left-1/2 -translate-x-1/2 text-xl font-semibold text-black">
                 Create column
               </h2>
-              <button
-                onClick={handleClose}
-                className="text-gray-400 hover:text-gray-600"
-              >
+
+              {/* Right close button */}
+              <button className="ml-auto text-black hover:text-black">
                 <X size={20} />
               </button>
             </div>
 
-            {/* Modal Body */}
-            <div className="p-6 space-y-6">
-              {/* Title Field */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter a column title"
-                  value={formData.title}
-                  onChange={(e) => handleInputChange("title", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+            {/* Body */}
+            <div className="px-6 py-5 grid grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto">
+              
+              {/* LEFT COLUMN */}
+              <div className="space-y-5">
+                {/* Title */}
+                <div>
+                  <label className="block text-base font-semibold mb-1">Title</label>
+                  <input
+                    placeholder="Enter a column title"
+                    className="w-full border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                </div>
 
-              {/* Type Field */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Type
-                </label>
-                <div className="relative">
-                  <select
-                    value={formData.type}
-                    onChange={(e) => handleInputChange("type", e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white"
-                  >
-                    <option value="Users and groups">
-                      👥 Users and groups
-                    </option>
-                    <option value="Text">📝 Text</option>
-                    <option value="Number">🔢 Number</option>
-                    <option value="Date">📅 Date</option>
+                {/* Description */}
+                <div>
+                  <label className="block text-base font-semibold mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    rows={4}
+                    className="w-full border rounded-md px-3 py-2 resize-none focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                </div>
+
+                {/* Mandatory */}
+                <Toggle
+                  label="Mandatory"
+                  value={formData.mandatory}
+                  onClick={() => toggle("mandatory")}
+                />
+
+                {/* Add column */}
+                <div>
+                  <label className="block text-base font-semibold mb-1">
+                    Add column to other views
+                  </label>
+                  <select className="w-full border rounded-md px-3 py-2">
+                    <option>Column</option>
+                    <option>All views</option>
+                    <option>Selected views</option>
                   </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                    <svg
-                      className="w-4 h-4 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
                 </div>
               </div>
 
-              {/* Checkboxes for Users, Groups, Teams */}
-              <div className="flex items-center gap-6">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={formData.users}
-                    onChange={() => handleToggle("users")}
-                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">Users</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={formData.groups}
-                    onChange={() => handleToggle("groups")}
-                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">Groups</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={formData.teams}
-                    onChange={() => handleToggle("teams")}
-                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">Teams</span>
-                </label>
-              </div>
+              {/* RIGHT COLUMN */}
+              <div className="space-y-5">
+                {/* Type */}
+                <div>
+                  <label className="block text-base font-semibold mb-1">Type</label>
+                  <div className="relative">
+                    <select className="w-full border rounded-md px-3 py-2 pl-9">
+                      <option>Users and groups</option>
+                    </select>
+                    <Users
+                      size={16}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                    />
+                  </div>
+                </div>
 
-              {/* Description Field */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Description
-                </label>
-                <textarea
-                  rows={4}
-                  value={formData.description}
-                  onChange={(e) =>
-                    handleInputChange("description", e.target.value)
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
-                />
-              </div>
+                {/* Users Groups Teams */}
+                <div className="flex gap-6">
+                  <Check label="Users" />
+                  <Check label="Groups" />
+                  <Check label="Teams" />
+                </div>
 
-              {/* Default Value */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Default
-                </label>
-                <div className="relative">
-                  <div className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-md bg-gray-50">
-                    <span className="w-6 h-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-xs font-medium">
+                {/* Default */}
+                <div>
+                  <label className="block text-base font-semibold mb-1">
+                    Default
+                  </label>
+                  <div className="flex items-center gap-2 border rounded-md px-3 py-2 bg-gray-50">
+                    <span className="w-7 h-7 rounded-full bg-[#f2f2f2] text-purple-600 text-xs font-semibold flex items-center justify-center">
                       IT
                     </span>
-                    <span className="text-sm text-gray-700">
-                      {formData.defaultValue}
+                    <span className="text-sm flex-1">
+                      Internal Project Team
                     </span>
-                    <button
-                      onClick={() => handleInputChange("defaultValue", "")}
-                      className="ml-auto text-gray-400 hover:text-gray-600"
-                    >
-                      <X size={16} />
-                    </button>
+                    <X size={20} className="text-black cursor-pointer" />
                   </div>
                 </div>
-              </div>
 
-              {/* Select multiple items */}
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">
-                  Select multiple items
-                </span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.selectMultipleItems}
-                    onChange={() => handleToggle("selectMultipleItems")}
-                    className="sr-only peer"
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                </label>
-              </div>
+                <Toggle
+                  label="Select multiple items"
+                  value={formData.selectMultipleItems}
+                  onClick={() => toggle("selectMultipleItems")}
+                />
 
-              {/* Mandatory */}
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">
-                  Mandatory
-                </span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.mandatory}
-                    onChange={() => handleToggle("mandatory")}
-                    className="sr-only peer"
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                </label>
-              </div>
-
-              {/* Show user status */}
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">
-                  Show user status
-                </span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.showUserStatus}
-                    onChange={() => handleToggle("showUserStatus")}
-                    className="sr-only peer"
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                </label>
-              </div>
-
-              {/* Add column to other views */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Add column to other views
-                </label>
-                <div className="relative">
-                  <select
-                    value={formData.addColumnToOtherViews}
-                    onChange={(e) =>
-                      handleInputChange("addColumnToOtherViews", e.target.value)
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white"
-                  >
-                    <option value="Column">Column</option>
-                    <option value="All views">All views</option>
-                    <option value="Selected views">Selected views</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                    <svg
-                      className="w-4 h-4 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
-                </div>
+                <Toggle
+                  label="Show user status"
+                  value={formData.showUserStatus}
+                  onClick={() => toggle("showUserStatus")}
+                />
               </div>
             </div>
 
-            {/* Modal Footer */}
-            <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={addMore}
-                  onChange={(e) => setAddMore(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="ml-2 text-sm text-gray-700">Add more</span>
-              </label>
-              <button
-                onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
+            {/* Footer */}
+            <div className="flex items-center px-6 py-4 justify-end gap-6">
+              <ToggleInline
+                label="Add more"
+                value={formData.addMore}
+                onClick={() => toggle("addMore")}
+              />
+
+              <button className="bg-[#00669f] text-white px-4 py-2 rounded-md font-medium hover:bg-[#005a8c]">
                 Save
               </button>
             </div>
+
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+/* ---------- SMALL COMPONENTS ---------- */
+
+const Toggle = ({ label, value, onClick }) => (
+  <div className="flex items-center justify-between">
+    <span className="text-base font-semibold">{label}</span>
+    <button
+      onClick={onClick}
+      className={`w-11 h-6 rounded-full relative transition ${
+        value ? "bg-[#00669f]" : "bg-gray-500"
+      }`}
+    >
+      <span
+        className={`absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition ${
+          value ? "translate-x-5" : ""
+        }`}
+      />
+    </button>
+  </div>
+);
+
+const Check = ({ label }) => (
+  <label className="flex items-center gap-3 text-base font-medium cursor-pointer">
+    <input
+      type="checkbox"
+      defaultChecked
+      className="w-5 h-5 rounded border-2 border-[#00669f] accent-[#00669f]"
+    />
+    {label}
+  </label>
+);
+
+const ToggleInline = ({ label, value, onClick }) => (
+  <div className="flex items-center gap-3 cursor-pointer">
+    <button
+      onClick={onClick}
+      className={`w-11 h-6 rounded-full relative transition ${
+        value ? "bg-[#00669f]" : "bg-gray-400"
+      }`}
+    >
+      <span
+        className={`absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition ${
+          value ? "translate-x-5" : ""
+        }`}
+      />
+    </button>
+
+    <span className="text-base font-semibold text-black">
+      {label}
+    </span>
+  </div>
+);
+
 
 export default TaskForce;

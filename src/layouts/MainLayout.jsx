@@ -19,7 +19,7 @@ const MainLayout = () => {
           <Outlet context={{ selectedFiles, setSelectedFiles }} />
         </div>
 
-        <RightPanel selectedFiles={selectedFiles} />
+        {/* <RightPanel selectedFiles={selectedFiles} /> */}
       </div>
     </div>
   );
