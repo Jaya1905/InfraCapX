@@ -1,0 +1,23 @@
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f7fa;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Below header */
+.main-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Center area */
+.content-area {
+  flex: 1;
+  background-color: #ffffff;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto;
+}
