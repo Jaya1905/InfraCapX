@@ -1,11 +1,10 @@
 .header {
-  height: 56px;
-  background-color: #0082c9; /* same blue tone */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    height: 56px;
+    background-color: #00679f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
 }
 
 /* Logo */
