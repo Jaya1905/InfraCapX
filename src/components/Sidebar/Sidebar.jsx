@@ -16,6 +16,21 @@ const Sidebar = () => {
           <span className="menu-text">Recent</span>
         </NavLink>
 
+        <NavLink to="/vacation-requests" className="menu-item">
+          <span className="menu-icon">🌴</span>
+          <span className="menu-text">Vacation Requests</span>
+        </NavLink>
+
+        <NavLink to="/teams" className="menu-item">
+          <span className="menu-icon">🧑‍🧒‍🧒</span>
+          <span className="menu-text">Teams</span>
+        </NavLink>
+
+        <NavLink to="/taskforce" className="menu-item">
+          <span className="menu-icon">🗂️</span>
+          <span className="menu-text">Task Force</span>
+        </NavLink>
+
         <NavLink to="/favorites" className="menu-item">
           <span className="menu-icon">⭐</span>
           <span className="menu-text">Favorites</span>

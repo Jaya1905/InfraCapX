@@ -2,6 +2,9 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Files from "../pages/Files/Files";
+import VacationRequests from "../pages/Vacation-Requests/VacationRequests";
+import Teams from "../pages/Teams/Teams";
+import TaskForce from "../pages/Task-Force/TaskForce";
 
 const AppRoutes = () => {
   return (
@@ -13,6 +16,9 @@ const AppRoutes = () => {
         <Route path="favorites" element={<Files />} />
         <Route path="shares" element={<Files />} />
         <Route path="tags" element={<Files />} />
+        <Route path="vacation-requests" element={<VacationRequests />} />
+        <Route path="teams" element={<Teams />} />
+        <Route path="taskforce" element={<TaskForce />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
