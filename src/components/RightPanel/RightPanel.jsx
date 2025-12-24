@@ -94,7 +94,7 @@ const RightPanel = ({ selectedFiles }) => {
         <div className="section">
           <div className="section-header flex items-center gap-1">
             <span>External shares</span>
-            <span className="info"><IoIosInformationCircle size={20} /></span>
+            <span className="info"><IoIosInformationCircle className="theme-color" size={20} /></span>
           </div>
 
           <select className="share-input">
@@ -107,7 +107,17 @@ const RightPanel = ({ selectedFiles }) => {
                 <span className="icon circle circle-blue flex justify-center items-center text-white"><MdOutlineInsertLink size={20} /></span>
                 <div className="share-info">
                   <strong>{share.label}</strong>
-                  <p className="permission">{share.permission}</p>
+                    <div className="flex items-center gap-1">
+                      <p className="permission theme-color">{share.permission}</p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-2 w-2" 
+                        viewBox="0 0 10 6"
+                        fill="#065e9a"
+                      >
+                        <polygon points="0,0 10,0 5,6" />
+                      </svg>
+                    </div>                  
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -119,10 +129,10 @@ const RightPanel = ({ selectedFiles }) => {
         </div>
 
         {/* ADDITIONAL SHARES */}
-        <div className="section">
+        <div className="section border-bottom">
           <div className="section-header flex items-center gap-1">
             <span>Additional shares</span>
-            <span className="info"><IoIosInformationCircle size={20} /></span>
+            <span className="info theme-color"><IoIosInformationCircle size={20} /></span>
           </div>
         </div>
 
@@ -163,16 +173,18 @@ const RightPanel = ({ selectedFiles }) => {
 
 
         {/* PERMISSIONS */}
-        <div className="permissions">
-          <span className="team flex items-center gap-1"><span className="bg-[#065e9a] p-2 rounded-full flex justify-center items-center">
+        {/* <div className="permissions flex items-center">
+          <span className="team gap-1">
+            <span className="bg-[#065e9a] p-2 rounded-full flex justify-center items-center">
             <FaUserFriends color="white" size={20} /> 
-            </span>Team folder</span>
+            </span>Team folder
+          </span>
           <div className="perm-list">
             {PERMISSIONS.map((p) => (
               <span key={p}>{p}</span>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </aside>
   );
