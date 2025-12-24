@@ -17,7 +17,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink to="/vacation-requests" className="menu-item">
-          <span className="menu-icon"><VscGitPullRequestNewChanges /></span>
+          <span className="menu-icon">🏝️</span>
           <span className="menu-text">Vacation Requests</span>
         </NavLink>
 

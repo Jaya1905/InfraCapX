@@ -63,54 +63,57 @@ const Files = () => {
 
         </div>
 
-        {/* 🔹 Info */}
-        <div className="folder-info">
-          <p className="managed-by flex items-center gap-1">
-            Virtual Annual Conference managed by
-            <span className="user user1 flex justify-center items-center w-fit gap-1"><img src="https://mockmind-api.uifaces.co/content/human/80.jpg" className="h-5 w-5 rounded-full" alt="avatar" /> Christine Schott</span> and
-            <span className="user user2 flex justify-center items-center w-fit gap-1"><img src="https://mockmind-api.uifaces.co/content/human/125.jpg" className="h-5 w-5 rounded-full" alt="avatar" /> Ros Christy</span>
-          </p>
+        <div className="ml-10">
+          {/* 🔹 Info */}
+          <div className="folder-info">
+            <p className="managed-by flex items-center gap-1">
+              Virtual Annual Conference managed by
+              <span className="user user1 flex justify-center items-center w-fit gap-1"><img src="https://mockmind-api.uifaces.co/content/human/80.jpg" className="h-5 w-5 rounded-full" alt="avatar" /> Christine Schott</span> and
+              <span className="user user2 flex justify-center items-center w-fit gap-1"><img src="https://mockmind-api.uifaces.co/content/human/125.jpg" className="h-5 w-5 rounded-full" alt="avatar" /> Ros Christy</span>
+            </p>
 
-          <p className="description">
-            The premier gathering for tech enthusiasts, professionals, and
-            innovators! In its annual edition, this virtual conference brings
-            together thought leaders, industry experts, and enthusiasts from
-            around the globe to explore the latest trends, innovations, and
-            breakthroughs in the world of technology.
-          </p>
+            <p className="description">
+              The premier gathering for tech enthusiasts, professionals, and
+              innovators! In its annual edition, this virtual conference brings
+              together thought leaders, industry experts, and enthusiasts from
+              around the globe to explore the latest trends, innovations, and
+              breakthroughs in the world of technology.
+            </p>
+          </div>
+
+          {/* 🔹 Useful links */}
+          <div className="useful-links">
+            <div className="links-title">Useful links:</div>
+            <ul>
+              <li className="list-disc">
+                Event details:
+                <a href="#"> https://tech-preview.nextcloud.com/f/535015</a>
+              </li>
+              <li className="list-disc">
+                Keynote speakers:
+                <a href="#"> https://tech-preview.nextcloud.com/f/534273</a>
+              </li>
+              <li className="list-disc">
+                Presentation:
+                <a href="#"> https://tech-preview.nextcloud.com/f/536083</a>
+              </li>
+            </ul>
+          </div>
+
+          {/* 🔹 Meta header */}
+          <div className="files-meta">
+            <span className="flex items-center gap-1">
+              <FaFile /> Type
+            </span>
+            <span className="flex items-center gap-1">
+              <FaRegCalendarAlt /> Modified
+            </span>
+            <span className="flex items-center gap-1">
+              <HiUsers /> People
+            </span>
+          </div>
         </div>
 
-        {/* 🔹 Useful links */}
-        <div className="useful-links">
-          <div className="links-title">Useful links:</div>
-          <ul>
-            <li>
-              Event details:
-              <a href="#"> https://tech-preview.nextcloud.com/f/535015</a>
-            </li>
-            <li>
-              Keynote speakers:
-              <a href="#"> https://tech-preview.nextcloud.com/f/534273</a>
-            </li>
-            <li>
-              Presentation:
-              <a href="#"> https://tech-preview.nextcloud.com/f/536083</a>
-            </li>
-          </ul>
-        </div>
-
-        {/* 🔹 Meta header */}
-        <div className="files-meta">
-          <span className="flex items-center gap-1">
-            <FaFile /> Type
-          </span>
-          <span className="flex items-center gap-1">
-            <FaRegCalendarAlt /> Modified
-          </span>
-          <span className="flex items-center gap-1">
-            <HiUsers /> People
-          </span>
-        </div>
 
         {/* 🔹 Table header */}
         <div className="files-table-header">
@@ -144,7 +147,7 @@ const Files = () => {
 
             {/* Icon column */}
             <span className="file-icon px-1">
-              {file.type === "Folder" ? <img src="./folder.png" alt="folder" /> : <img src="./file.png" alt="file"/>}
+              {file.type === "Folder" ? <img src="./folder.png" alt="folder" /> : <img src="./file.png" alt="file" />}
             </span>
 
             {/* Name */}
@@ -161,14 +164,14 @@ const Files = () => {
 
             {/* Actions */}
             <span className="actions">
-              {file.shared && <span className="action blue">Shared</span>}
-              <span className="action blue">
+              {file.shared && <span className="action theme-color">Shared</span>}
+              <span className="action theme-color">
                 <MdOutlineInsertLink size={20} />
               </span>
               <span className="action black">
                 <FaEllipsis size={20} />
               </span>
-              <span className="action blue">
+              <span className="action theme-color">
                 <HiUserAdd size={20} />
               </span>
             </span>

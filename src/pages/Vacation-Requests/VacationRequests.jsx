@@ -13,9 +13,11 @@ import {
     UserPlus,
     X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { BiSolidZap } from "react-icons/bi";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { HiUserAdd } from "react-icons/hi";
+import { IoMdShare } from "react-icons/io";
 import { MdMenuOpen } from "react-icons/md";
 import { PiPlugsConnectedFill } from "react-icons/pi";
 import { RiMenuAddFill } from "react-icons/ri";
@@ -24,6 +26,8 @@ import { TbTableOptions } from "react-icons/tb";
 const VacationRequests = () => {
     const [selectedRows, setSelectedRows] = useState([]);
     const [showRightPanel, setShowRightPanel] = useState(false);
+    const [activeTab, setActiveTab] = useState("Sharing");
+
 
     const viewsData = [
         {
@@ -97,6 +101,14 @@ const VacationRequests = () => {
         }
     };
 
+    useEffect(() => {
+        if (tableData.length > 0 && selectedRows.length === 0) {
+            setSelectedRows([tableData[0].id]);
+            setShowRightPanel(true);
+        }
+    }, [tableData]);
+
+
     return (
         <div className="flex flex-col lg:flex-row h-screen bg-gray-50">
             {/* Main Content Area */}
@@ -168,54 +180,65 @@ const VacationRequests = () => {
 
                     {/* Desktop Views - Table Layout */}
                     <div className="hidden lg:block overflow-x-auto">
-                        <div className="min-w-full">
-                            <div className="grid grid-cols-6 gap-4 text-sm font-medium text-gray-500 border-b border-gray-200 pb-2 mb-2">
-                                <span>View</span>
-                                <span>Rows</span>
-                                <span>Columns</span>
-                                <span>Last edited</span>
-                                <span>Shares</span>
-                                <span>Actions</span>
-                            </div>
+                        <table className="min-w-full text-sm">
+                            {/* Header */}
+                            <thead className="border-b border-gray-200 text-gray-500 font-medium">
+                                <tr>
+                                    <th className="px-2 py-2 text-left">View</th>
+                                    <th className="px-2 py-2 text-left">Rows</th>
+                                    <th className="px-2 py-2 text-left">Columns</th>
+                                    <th className="px-2 py-2 text-left">Last edited</th>
+                                    <th className="px-2 py-2 text-left">Shares</th>
+                                    <th className="px-2 py-2 text-left">Actions</th>
+                                </tr>
+                            </thead>
 
-                            {viewsData.map((view, index) => (
-                                <div
-                                    key={index}
-                                    className="grid grid-cols-6 gap-4 py-2 px-2 rounded hover:bg-gray-50"
-                                >
-                                    <div className="flex items-center gap-2 min-w-0">
-                                        {view.name === "Create Vacation Request" && (
-                                            "➕"
-                                        )}
-                                        {view.name === "Open Request" && "📝"}
-                                        {view.name === "Request Status" && (
-                                            "❓"
-                                        )}
-                                        {view.name === "Closed requests" && (
-                                            "✅"
-                                        )}
-                                        <span className="text-sm text-gray-900 truncate">
-                                            {view.name}
-                                        </span>
-                                    </div>
-                                    <span className="text-sm text-gray-600">{view.rows}</span>
-                                    <span className="text-sm text-gray-600">{view.columns}</span>
-                                    <span className="text-sm text-gray-600 truncate">
-                                        {view.lastEdited}
-                                    </span>
-                                    <span></span>
-                                    <button className="text-gray-500 cursor-pointer hover:text-gray-600 justify-self-start">
-                                        <Ellipsis />
-                                    </button>
-                                </div>
-                            ))}
-                            <div className="grid grid-cols-6 px-2 mt-4">
-                                <span className="text-black font-bold text-lg">Total</span>
-                                <span className="text-lg text-black font-bold">4</span>
-                                <span className="text-lg text-black font-bold">9</span>
-                            </div>
-                        </div>
+                            {/* Body */}
+                            <tbody>
+                                {viewsData.map((view, index) => (
+                                    <tr
+                                        key={index}
+                                        className="hover:bg-gray-50"
+                                    >
+                                        <td className="px-2 py-2">
+                                            <div className="flex items-center gap-2 min-w-0">
+                                                {view.name === "Create Vacation Request" && "➕"}
+                                                {view.name === "Open Request" && "📝"}
+                                                {view.name === "Request Status" && "❓"}
+                                                {view.name === "Closed requests" && "✅"}
+                                                <span className="text-gray-900 truncate">
+                                                    {view.name}
+                                                </span>
+                                            </div>
+                                        </td>
+
+                                        <td className="px-2 py-2 text-gray-600">{view.rows}</td>
+                                        <td className="px-2 py-2 text-gray-600">{view.columns}</td>
+                                        <td className="px-2 py-2 text-gray-600 truncate">
+                                            {view.lastEdited}
+                                        </td>
+                                        <td className="px-2 py-2"></td>
+                                        <td className="px-2 py-2">
+                                            <button className="text-gray-500 hover:text-gray-600">
+                                                <Ellipsis />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+
+                            {/* Footer */}
+                            <tfoot>
+                                <tr className="border-t border-gray-200">
+                                    <td className="px-2 py-3 font-bold text-lg text-black">Total</td>
+                                    <td className="px-2 py-3 font-bold text-lg text-black">4</td>
+                                    <td className="px-2 py-3 font-bold text-lg text-black">9</td>
+                                    <td colSpan={3}></td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
+
                 </div>
 
                 {/* Data Section */}
@@ -230,14 +253,14 @@ const VacationRequests = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-4">
-                        <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 font-bold cursor-pointer w-full sm:w-auto justify-center sm:justify-start">
+                        <button className="flex items-center gap-2 py-2 rounded-lg hover:bg-gray-100 font-bold cursor-pointer w-full sm:w-auto justify-center sm:justify-start">
                             <Plus size={20} /> Create row
                         </button>
                         <div className="relative flex items-center w-full sm:w-auto">
                             <input
                                 type="text"
                                 placeholder="Search"
-                                className="w-full sm:w-64 pl-8 pr-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full sm:w-64 pl-8 pr-3 py-2 font-bold rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             <span className="absolute left-2 text-gray-400 flex justify-center items-center">
                                 <Search size={15} />
@@ -328,62 +351,76 @@ const VacationRequests = () => {
 
                     {/* Desktop Data - Table Layout */}
                     <div className="hidden lg:block overflow-x-auto">
-                        <div className="min-w-full">
-                            <div className="grid grid-cols-7 gap-4 text-sm font-medium text-gray-500 border-b border-gray-200 pb-2 mb-2">
-                                <input type="checkbox" className="justify-self-start" />
-                                <span>Comments</span>
-                                <span>Approved by</span>
-                                <span>Approve date</span>
-                                <span>Approved</span>
-                                <span>Request date</span>
-                                <button className="text-gray-400 justify-self-start">
-                                    <Ellipsis />
-                                </button>
-                            </div>
+                        <table className="min-w-full text-sm  border-gray-200 border-collapse">
+                            {/* Header */}
+                            <thead className="text-gray-500 font-medium">
+                                <tr>
+                                    <th className="px-2 py-2 text-left">
+                                        <input type="checkbox" />
+                                    </th>
+                                    <th className="px-2 py-2 text-left">Comments</th>
+                                    <th className="px-2 py-2 text-left">Approved by</th>
+                                    <th className="px-2 py-2 text-left">Approve date</th>
+                                    <th className="px-2 py-2 text-left">Approved</th>
+                                    <th className="px-2 py-2 text-left">Request date</th>
+                                    <th className="px-2 py-2 text-left">
+                                        <Ellipsis className="text-gray-400" />
+                                    </th>
+                                </tr>
+                            </thead>
 
-                            {tableData.map((row) => (
-                                <div
-                                    key={row.id}
-                                    className="grid grid-cols-7 gap-4 py-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer"
-                                    onClick={() => handleRowSelect(row.id)}
-                                >
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedRows.includes(row.id)}
-                                        onChange={() => handleRowSelect(row.id)}
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="justify-self-start"
-                                    />
-                                    <span className="text-sm text-gray-900 truncate">
-                                        {row.comments}
-                                    </span>
-                                    <span className="text-sm text-gray-600">
-                                        {row.approvedBy}
-                                    </span>
-                                    <span className="text-sm text-gray-600">
-                                        {row.approveDate}
-                                    </span>
-                                    <span className="flex items-center">
-                                        {row.approved === true && (
-                                            <FaRegCheckCircle size={20} />
-                                        )}
-                                        {row.approved === false && (
-                                            <Circle size={20} />
-                                        )}
-                                    </span>
-                                    <span className="text-sm text-gray-600">
-                                        {row.requestDate}
-                                    </span>
-                                    <button
-                                        className="text-gray-400 hover:text-gray-600 justify-self-start cursor-pointer"
-                                        onClick={(e) => e.stopPropagation()}
+                            {/* Body */}
+                            <tbody>
+                                {tableData.map((row) => (
+                                    <tr
+                                        key={row.id}
+                                        className="hover:bg-gray-50 cursor-pointer"
+                                        onClick={() => handleRowSelect(row.id)}
                                     >
-                                        <Ellipsis />
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
+                                        <td className="border border-gray-200 px-2 py-3">
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedRows.includes(row.id)}
+                                                onChange={() => handleRowSelect(row.id)}
+                                                onClick={(e) => e.stopPropagation()}
+                                            />
+                                        </td>
+
+                                        <td className="border border-gray-200 px-2 py-3 text-gray-900 truncate max-w-xs">
+                                            {row.comments}
+                                        </td>
+
+                                        <td className="border border-gray-200 px-2 py-3 text-gray-600">
+                                            {row.approvedBy}
+                                        </td>
+
+                                        <td className="border border-gray-200 px-2 py-3 text-gray-600">
+                                            {row.approveDate}
+                                        </td>
+
+                                        <td className="border border-gray-200 px-2 py-3">
+                                            {row.approved ? <FaRegCheckCircle size={20} /> : <Circle size={20} />}
+                                        </td>
+
+                                        <td className="border border-gray-200 px-2 py-3 text-gray-600">
+                                            {row.requestDate}
+                                        </td>
+
+                                        <td className="border border-gray-200 px-2 py-3">
+                                            <button
+                                                className="text-gray-400 hover:text-gray-600"
+                                                onClick={(e) => e.stopPropagation()}
+                                            >
+                                                <Ellipsis />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
+
+
                 </div>
             </div>
 
@@ -430,19 +467,26 @@ const VacationRequests = () => {
                             </p>
                         </div>
 
-                        <div className="flex border-b border-gray-200 mb-4">
-                            <button className="px-4 py-2 border-b-4 font-bold border-blue-800 flex flex-col justify-center items-center gap-2">
-                                <HiUserAdd fill="black" size={25} />
+                        <div className="tabs">
+                            <span
+                                className={`tab ${activeTab === "Activity" ? "active" : ""} flex flex-col`}
+                                onClick={() => setActiveTab("Activity")}
+                            >
+                                <span className="tab-icon"><HiUserAdd size={20} /></span>
                                 Sharing
-                            </button>
-                            <button className="px-4 py-2 font-medium flex flex-col justify-center items-center gap-2">
-                                <PiPlugsConnectedFill size={25} fill="black" />
+                            </span>
+
+                            <span
+                                className={`tab ${activeTab === "Sharing" ? "active" : ""} flex flex-col`}
+                                onClick={() => setActiveTab("Sharing")}
+                            >
+                                <span className="tab-icon"><PiPlugsConnectedFill size={20} /></span>
                                 Integration
-                            </button>
+                            </span>
                         </div>
 
-                        <div className="space-y-4">
-                            <h4 className="font-medium text-gray-900">
+                        <div className="space-y-4 mt-5">
+                            <h4 className="font-medium text-gray-900 text-[17px]">
                                 Share with accounts, groups or teams
                             </h4>
                             <div className="flex gap-2">
