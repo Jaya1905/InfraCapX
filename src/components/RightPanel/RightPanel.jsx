@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import "./rightpanel.css";
+import { BsStarFill } from "react-icons/bs";
+import { Ellipsis, EllipsisIcon, X } from "lucide-react";
+import { BiSolidZap } from "react-icons/bi";
+import { IoIosInformationCircle, IoMdShare } from "react-icons/io";
+import { RiShareBoxFill, RiShareBoxLine } from "react-icons/ri";
+import { MdOutlineContentCopy, MdOutlineInsertLink } from "react-icons/md";
+import { FaAngleDown, FaAngleUp, FaUserFriends, FaUsers } from "react-icons/fa";
 
 const RELATED_RESOURCES = {
   name: "Virtual Annual Conference",
@@ -40,28 +47,28 @@ const RightPanel = ({ selectedFiles }) => {
       <div className="panel-header">
         <div>
           <h3>{file.name}</h3>
-          <p className="meta">
-            ⭐ {file.size} · {file.modified} · Owner <strong className="name_bg">Christine...</strong>
+          <p className="meta flex items-center gap-1">
+            <BsStarFill /> {file.size} · {file.modified} · Owner <strong className="name_bg">Christine...</strong>
           </p>
         </div>
-        <div className="header-actions">⋯ ✕</div>
+        <div className="header-actions flex items-center gap-2"><Ellipsis /> <X /></div>
       </div>
 
       {/* ===== TABS ===== */}
       <div className="tabs">
         <span
-          className={`tab ${activeTab === "Activity" ? "active" : ""}`}
+          className={`tab ${activeTab === "Activity" ? "active" : ""} flex flex-col`}
           onClick={() => setActiveTab("Activity")}
         >
-          <span className="tab-icon">⚡</span>
+          <span className="tab-icon"><BiSolidZap size={20} /></span>
           Activity
         </span>
 
         <span
-          className={`tab ${activeTab === "Sharing" ? "active" : ""}`}
+          className={`tab ${activeTab === "Sharing" ? "active" : ""} flex flex-col`}
           onClick={() => setActiveTab("Sharing")}
         >
-          <span className="tab-icon">🔗</span>
+          <span className="tab-icon"><IoMdShare size={20} /></span>
           Sharing
         </span>
       </div>
@@ -72,22 +79,22 @@ const RightPanel = ({ selectedFiles }) => {
         {/* INTERNAL LINK */}
         <div className="section">
           <div className="row">
-            <span className="icon circle circle-grey">🔗</span>
+            <span className="icon circle circle-grey flex justify-center items-center text-white"><RiShareBoxFill size={20} /></span>
             <div>
               <strong className="muted-head">Internal link</strong>
               <p className="muted">
                 Only works for people with access to this folder
               </p>
             </div>
-            <span className="copy">📋</span>
+            <span className="copy"><MdOutlineContentCopy size={20} /></span>
           </div>
         </div>
 
         {/* EXTERNAL SHARES */}
         <div className="section">
-          <div className="section-header">
+          <div className="section-header flex items-center gap-1">
             <span>External shares</span>
-            <span className="info">ℹ️</span>
+            <span className="info"><IoIosInformationCircle size={20} /></span>
           </div>
 
           <select className="share-input">
@@ -95,38 +102,43 @@ const RightPanel = ({ selectedFiles }) => {
           </select>
 
           {EXTERNAL_SHARES.map((share) => (
-            <div key={share.id} className="share-row">
-              <span className="icon circle circle-blue">🔗</span>
-              <div className="share-info">
-                <strong>{share.label}</strong>
-                <p className="permission">{share.permission}</p>
+            <div key={share.id} className="share-row flex justify-between items-center">
+              <div className="share-row">
+                <span className="icon circle circle-blue flex justify-center items-center text-white"><MdOutlineInsertLink size={20} /></span>
+                <div className="share-info">
+                  <strong>{share.label}</strong>
+                  <p className="permission">{share.permission}</p>
+                </div>
               </div>
-              <div>
-                <span className="copy">📋</span>
-                <span className="more">⋯</span>
-              </div>              
+              <div className="flex items-center gap-2">
+                <span className="copy"><MdOutlineContentCopy size={20} /></span>
+                <span className="more"><EllipsisIcon size={20} /></span>
+              </div>
             </div>
           ))}
         </div>
 
         {/* ADDITIONAL SHARES */}
         <div className="section">
-          <div className="section-header">
+          <div className="section-header flex items-center gap-1">
             <span>Additional shares</span>
-            <span className="info">ℹ️</span>
+            <span className="info"><IoIosInformationCircle size={20} /></span>
           </div>
         </div>
 
         {/* RELATED TEAM RESOURCES */}
         <div className="realted_team">
           <h2 >Related team resources</h2>
-          <div className="section boxed">          
+          <div className="section boxed">
             <div
-              className="section-header clickable"
+              className="section-header clickable flex justify-between items-center gap-4"
               onClick={() => setOpenResources(!openResources)}
             >
-              <span>👥 {RELATED_RESOURCES.name}</span>
-              <span>{openResources ? "▴" : "▾"}</span>
+              <span className="flex items-center gap-2"><FaUsers size={20} /> {RELATED_RESOURCES.name}</span>
+              <div className="flex justify-center items-center gap-3">
+                <RiShareBoxLine size={20} />
+                <span>{openResources ? <FaAngleUp size={20} /> : <FaAngleDown size={20} />}</span>
+              </div>
             </div>
             {openResources && (
               <>
@@ -148,11 +160,11 @@ const RightPanel = ({ selectedFiles }) => {
             )}
           </div>
         </div>
-        
+
 
         {/* PERMISSIONS */}
         <div className="permissions">
-          <span className="team">👥 Team folder</span>
+          <span className="team flex items-center gap-1"><FaUserFriends size={20} /> Team folder</span>
           <div className="perm-list">
             {PERMISSIONS.map((p) => (
               <span key={p}>{p}</span>

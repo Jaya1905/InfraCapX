@@ -14,6 +14,11 @@ import {
     X,
 } from "lucide-react";
 import { useState } from "react";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { HiUserAdd } from "react-icons/hi";
+import { PiPlugsConnectedFill } from "react-icons/pi";
+import { RiMenuAddFill } from "react-icons/ri";
+import { TbTableOptions } from "react-icons/tb";
 
 const VacationRequests = () => {
     const [selectedRows, setSelectedRows] = useState([]);
@@ -111,8 +116,8 @@ const VacationRequests = () => {
                         <h3 className="text-base sm:text-lg font-medium text-gray-900">
                             Views
                         </h3>
-                        <button className="bg-gray-200 text-black font-bold px-2 py-1 rounded-md">
-                            <MenuIcon size={16} className="sm:w-5 sm:h-5" />
+                        <button className="bg-blue-200/40 text-black font-bold px-2 py-1 rounded-md">
+                            <RiMenuAddFill size={16} className="sm:w-5 sm:h-5" />
                         </button>
                     </div>
 
@@ -178,14 +183,14 @@ const VacationRequests = () => {
                                 >
                                     <div className="flex items-center gap-2 min-w-0">
                                         {view.name === "Create Vacation Request" && (
-                                            <Plus color="purple" size={20} />
+                                            "➕"
                                         )}
-                                        {view.name === "Open Request" && <FileTextIcon size={20} />}
+                                        {view.name === "Open Request" && "📝"}
                                         {view.name === "Request Status" && (
-                                            <LucideCircleQuestionMark size={20} />
+                                            "❓"
                                         )}
                                         {view.name === "Closed requests" && (
-                                            <CheckSquare2 fill="green" color="white" size={20} />
+                                            "✅"
                                         )}
                                         <span className="text-sm text-gray-900 truncate">
                                             {view.name}
@@ -217,14 +222,14 @@ const VacationRequests = () => {
                         <h3 className="text-base sm:text-lg font-medium text-gray-900">
                             Data
                         </h3>
-                        <button className="bg-gray-200 px-2 py-1 rounded-lg">
-                            <TableConfigIcon size={16} className="sm:w-5 sm:h-5" />
+                        <button className="bg-blue-200/40 px-2 py-1 rounded-lg">
+                            <TbTableOptions size={16} className="sm:w-5 sm:h-5" />
                         </button>
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-4">
                         <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 font-bold cursor-pointer w-full sm:w-auto justify-center sm:justify-start">
-                            <Plus size={16} /> Create row
+                            <Plus size={20} /> Create row
                         </button>
                         <div className="relative flex items-center w-full sm:w-auto">
                             <input
@@ -297,10 +302,10 @@ const VacationRequests = () => {
                                             </span>
                                             <div className="flex items-center mt-1">
                                                 {row.approved === true && (
-                                                    <CheckCircle2 size={20} className="text-green-600" />
+                                                    <FaRegCheckCircle size={20} />
                                                 )}
                                                 {row.approved === false && (
-                                                    <Circle size={20} className="text-gray-400" />
+                                                    <Circle size={20} />
                                                 )}
                                                 {row.approved === null && (
                                                     <span className="text-gray-400">-</span>
@@ -358,10 +363,10 @@ const VacationRequests = () => {
                                     </span>
                                     <span className="flex items-center">
                                         {row.approved === true && (
-                                            <CheckCircle2 size={20} className="text-green-600" />
+                                            <FaRegCheckCircle size={20} />
                                         )}
                                         {row.approved === false && (
-                                            <Circle size={20} className="text-gray-400" />
+                                            <Circle size={20} />
                                         )}
                                     </span>
                                     <span className="text-sm text-gray-600">
@@ -425,11 +430,11 @@ const VacationRequests = () => {
 
                         <div className="flex border-b border-gray-200 mb-4">
                             <button className="px-4 py-2 text-lg border-b-4 font-bold border-blue-800 flex flex-col justify-center items-center gap-2">
-                                <UserPlus fill="black" size={20} />
+                                <HiUserAdd fill="black" size={25} />
                                 Sharing
                             </button>
                             <button className="px-4 py-2 text-lg font-medium flex flex-col justify-center items-center gap-2">
-                                <LucideSettings2 size={20} fill="black" />
+                                <PiPlugsConnectedFill size={25} fill="black" />
                                 Integration
                             </button>
                         </div>
