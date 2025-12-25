@@ -18,11 +18,11 @@ const Login = () => {
 
   return (
     <AuthCard
-      subtitle="Sign in to continue"
+      subtitle="Login to continue"
       footer={
         <>
           Not a member?{" "}
-          <a href="#" className="text-[#00669f] font-semibold hover:underline">
+          <a href="/register" className="text-[#00669f] font-semibold hover:underline">
             Register
           </a>
         </>
@@ -50,8 +50,8 @@ const Login = () => {
         />
 
         {/* Remember + Forgot */}
-        <div className="flex items-center justify-between text-sm">
-          <label className="flex items-center gap-2 text-gray-600">
+        <div className="flex items-center justify-between text-[11px] xs:text-xs sm:text-sm">
+          <label className="flex items-center gap-1.5 xs:gap-2 text-gray-600">
             <input
               type="checkbox"
               className="accent-[#00669f]"
@@ -63,14 +63,14 @@ const Login = () => {
 
           <Link
             to="/reset-password"
-            className="text-[#00669f] font-medium hover:underline"
+            className="text-[#00669f] font-medium hover:underline whitespace-nowrap"
           >
             Forgot Password?
           </Link>
         </div>
 
         {/* Button */}
-        <PrimaryButton type="submit">Sign In</PrimaryButton>
+        <PrimaryButton type="submit">Login</PrimaryButton>
       </form>
     </AuthCard>
   );

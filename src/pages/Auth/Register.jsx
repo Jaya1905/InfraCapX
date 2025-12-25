@@ -1,128 +1,78 @@
+import { useState } from "react";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import FormInput from "../../components/Common/FormInput";
+import PrimaryButton from "../../components/Common/PrimaryButton";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [agreeTerms, setAgreeTerms] = useState(false);
+
+  const handleChange = (field) => (e) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Register attempt:", { ...formData, agreeTerms });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#00669f] via-[#0b7dbf] to-[#d2e2ef] px-4 py-8">
-      {/* Card */}
-      <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-8">
+      <div className="w-full max-w-2xl bg-white rounded-xl shadow-2xl p-6 sm:p-8">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-semibold text-[#00669f]">
-            InfraCapx
-          </h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Create your account
-          </p>
+        <div className="text-center mb-6">
+          <h1 className="text-2xl font-semibold text-[#00669f]">InfraCapx</h1>
+          <p className="text-sm text-gray-500 mt-1">Create your account</p>
         </div>
 
         {/* Form */}
-        <form className="space-y-5">
-          {/* Full Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name
-            </label>
-            <div className="relative">
-              <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="John Doe"
-                className="
-                  w-full pl-10 pr-3 py-3
-                  bg-gray-50
-                  border border-gray-300
-                  rounded-lg
-                  text-sm
-                  placeholder-gray-400
-                  transition
-                  hover:border-[#00669f]
-                  focus:border-[#00669f]
-                  focus:ring-2 focus:ring-[#00669f]/20
-                  outline-none
-                "
-              />
-            </div>
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Two column layout for larger screens */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <FormInput
+              label="Full Name"
+              type="text"
+              placeholder="John Doe"
+              icon={FaUser}
+              value={formData.fullName}
+              onChange={handleChange("fullName")}
+              required
+            />
 
-          {/* Email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email address
-            </label>
-            <div className="relative">
-              <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="email"
-                placeholder="you@company.com"
-                className="
-                  w-full pl-10 pr-3 py-3
-                  bg-gray-50
-                  border border-gray-300
-                  rounded-lg
-                  text-sm
-                  placeholder-gray-400
-                  transition
-                  hover:border-[#00669f]
-                  focus:border-[#00669f]
-                  focus:ring-2 focus:ring-[#00669f]/20
-                  outline-none
-                "
-              />
-            </div>
-          </div>
+            <FormInput
+              label="Email address"
+              type="email"
+              placeholder="you@company.com"
+              icon={FaEnvelope}
+              value={formData.email}
+              onChange={handleChange("email")}
+              required
+            />
 
-          {/* Password */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <div className="relative">
-              <FaLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="password"
-                placeholder="••••••••"
-                className="
-                  w-full pl-10 pr-3 py-3
-                  bg-gray-50
-                  border border-gray-300
-                  rounded-lg
-                  text-sm
-                  placeholder-gray-400
-                  transition
-                  hover:border-[#00669f]
-                  focus:border-[#00669f]
-                  focus:ring-2 focus:ring-[#00669f]/20
-                  outline-none
-                "
-              />
-            </div>
-          </div>
+            <FormInput
+              label="Password"
+              type="password"
+              placeholder="••••••••"
+              icon={FaLock}
+              value={formData.password}
+              onChange={handleChange("password")}
+              required
+            />
 
-          {/* Confirm Password */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirm Password
-            </label>
-            <div className="relative">
-              <FaLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="password"
-                placeholder="••••••••"
-                className="
-                  w-full pl-10 pr-3 py-3
-                  bg-gray-50
-                  border border-gray-300
-                  rounded-lg
-                  text-sm
-                  placeholder-gray-400
-                  transition
-                  hover:border-[#00669f]
-                  focus:border-[#00669f]
-                  focus:ring-2 focus:ring-[#00669f]/20
-                  outline-none
-                "
-              />
-            </div>
+            <FormInput
+              label="Confirm Password"
+              type="password"
+              placeholder="••••••••"
+              icon={FaLock}
+              value={formData.confirmPassword}
+              onChange={handleChange("confirmPassword")}
+              required
+            />
           </div>
 
           {/* Terms */}
@@ -130,6 +80,8 @@ const Register = () => {
             <input
               type="checkbox"
               className="accent-[#00669f] mt-1"
+              checked={agreeTerms}
+              onChange={(e) => setAgreeTerms(e.target.checked)}
             />
             <span className="text-gray-600">
               I agree to the{" "}
@@ -144,22 +96,16 @@ const Register = () => {
           </div>
 
           {/* Button */}
-          <button
-            type="submit"
-            className="w-full bg-[#00669f] text-white py-2.5 rounded-md font-semibold hover:bg-[#005a8c] transition"
-          >
-            Create Account
-          </button>
+          <div className="flex justify-center">
+            <PrimaryButton type="submit" className="sm:w-auto sm:px-35">Create Account</PrimaryButton>
+          </div>
         </form>
 
         {/* Footer */}
         <p className="text-center text-sm text-gray-600 mt-6">
           Already have an account?{" "}
-          <a
-            href="/login"
-            className="text-[#00669f] font-semibold hover:underline"
-          >
-            Sign In
+          <a href="/login" className="text-[#00669f] font-semibold hover:underline">
+            Login
           </a>
         </p>
       </div>
