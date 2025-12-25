@@ -2,7 +2,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 
 const Login = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#00669f] via-[#0b7dbf] to-[#d2e2ef] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#00669f] via-[#0b7dbf] to-[#d2e2ef] px-4">
       {/* Card */}
       <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-8">
         {/* Header */}
@@ -104,7 +104,7 @@ const Login = () => {
         <p className="text-center text-sm text-gray-600 mt-6">
           Not a member?{" "}
           <a
-            href="#"
+            href="/register"
             className="text-[#00669f] font-semibold hover:underline"
           >
             Register
