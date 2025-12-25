@@ -12,7 +12,7 @@ import { FaEllipsis } from "react-icons/fa6";
 import { BiPlus } from "react-icons/bi";
 
 const Files = () => {
-  const { selectedFiles, setSelectedFiles, toggleSidebar } = useOutletContext();
+  const { selectedFiles, setSelectedFiles, toggleSidebar, sidebarCollapsed } = useOutletContext();
 
   useEffect(() => {
     if (FILES_DATA.length > 0 && selectedFiles.length === 0) {
@@ -46,7 +46,7 @@ const Files = () => {
             onClick={toggleSidebar}
             className="p-1 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
           >
-            <MdMenuOpen size={30} />
+            {!sidebarCollapsed ? <MdMenuOpen size={30} /> : <img src="./open.png" width={25} height={25} />}
           </button>
 
           <div className="breadcrumb">
