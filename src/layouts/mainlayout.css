@@ -20,4 +20,10 @@
   border-left: 1px solid #e5e7eb;
   border-right: 1px solid #e5e7eb;
   overflow-y: auto;
+  transition: margin-left 0.3s ease;
+}
+
+/* Content area when sidebar is collapsed */
+.content-area.sidebar-collapsed {
+  margin-left: 0;
 }

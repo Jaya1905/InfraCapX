@@ -6,16 +6,30 @@ import "./mainlayout.css";
 
 const MainLayout = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarCollapsed(!sidebarCollapsed);
+  };
 
   return (
     <div className="app-container">
       <Header />
 
       <div className="main-body">
-        <Sidebar />
+        <Sidebar collapsed={sidebarCollapsed} />
 
-        <div className="content-area">
-          <Outlet context={{ selectedFiles, setSelectedFiles }} />
+        <div
+          className={`content-area ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}
+        >
+          <Outlet
+            context={{
+              selectedFiles,
+              setSelectedFiles,
+              sidebarCollapsed,
+              toggleSidebar,
+            }}
+          />
         </div>
       </div>
     </div>

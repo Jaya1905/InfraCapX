@@ -12,7 +12,7 @@ import { FaEllipsis } from "react-icons/fa6";
 import { BiPlus } from "react-icons/bi";
 
 const Files = () => {
-  const { selectedFiles, setSelectedFiles } = useOutletContext();
+  const { selectedFiles, setSelectedFiles, toggleSidebar } = useOutletContext();
 
   useEffect(() => {
     if (FILES_DATA.length > 0 && selectedFiles.length === 0) {
@@ -42,7 +42,12 @@ const Files = () => {
       <div className="flex-1 files-page">
         {/* 🔹 Breadcrumb + New */}
         <div className="breadcrumb-row gap-5">
-          <MdMenuOpen size={30} />
+          <button
+            onClick={toggleSidebar}
+            className="p-1 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
+          >
+            <MdMenuOpen size={30} />
+          </button>
 
           <div className="breadcrumb">
             <span className="crumb folder">
@@ -60,7 +65,6 @@ const Files = () => {
               <BiPlus /> New
             </button>
           </div>
-
         </div>
 
         <div className="ml-10">
@@ -68,8 +72,23 @@ const Files = () => {
           <div className="folder-info">
             <p className="managed-by flex items-center gap-1">
               Virtual Annual Conference managed by
-              <span className="user user1 flex justify-center items-center w-fit gap-1"><img src="https://mockmind-api.uifaces.co/content/human/80.jpg" className="h-5 w-5 rounded-full" alt="avatar" /> Christine Schott</span> and
-              <span className="user user2 flex justify-center items-center w-fit gap-1"><img src="https://mockmind-api.uifaces.co/content/human/125.jpg" className="h-5 w-5 rounded-full" alt="avatar" /> Ros Christy</span>
+              <span className="user user1 flex justify-center items-center w-fit gap-1">
+                <img
+                  src="https://mockmind-api.uifaces.co/content/human/80.jpg"
+                  className="h-5 w-5 rounded-full"
+                  alt="avatar"
+                />{" "}
+                Christine Schott
+              </span>{" "}
+              and
+              <span className="user user2 flex justify-center items-center w-fit gap-1">
+                <img
+                  src="https://mockmind-api.uifaces.co/content/human/125.jpg"
+                  className="h-5 w-5 rounded-full"
+                  alt="avatar"
+                />{" "}
+                Ros Christy
+              </span>
             </p>
 
             <p className="description">
@@ -114,7 +133,6 @@ const Files = () => {
           </div>
         </div>
 
-
         {/* 🔹 Table header */}
         <div className="files-table-header">
           <span>
@@ -147,7 +165,11 @@ const Files = () => {
 
             {/* Icon column */}
             <span className="file-icon px-1">
-              {file.type === "Folder" ? <img src="./folder.png" alt="folder" /> : <img src="./file.png" alt="file" />}
+              {file.type === "Folder" ? (
+                <img src="./folder.png" alt="folder" />
+              ) : (
+                <img src="./file.png" alt="file" />
+              )}
             </span>
 
             {/* Name */}
@@ -164,7 +186,9 @@ const Files = () => {
 
             {/* Actions */}
             <span className="actions">
-              {file.shared && <span className="action theme-color">Shared</span>}
+              {file.shared && (
+                <span className="action theme-color">Shared</span>
+              )}
               <span className="action theme-color">
                 <MdOutlineInsertLink size={20} />
               </span>
