@@ -8,6 +8,7 @@ import TaskForce from "../pages/Task-Force/TaskForce";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ResetPassword from "../pages/Auth/ResetPassword";
+import ChangePassword from "../pages/Auth/ChangePassword";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Files />} />
         <Route path="files" element={<Files />} />
