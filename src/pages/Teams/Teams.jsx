@@ -20,7 +20,7 @@ const Teams = () => {
               <img src="./open.png" width={25} height={25} />
             )}
           </button>
-          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">
+          <h1 className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-900">
             Teams
           </h1>
         </div>

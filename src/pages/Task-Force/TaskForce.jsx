@@ -45,7 +45,7 @@ const TaskForce = () => {
               )}
             </button>
             <span className="text-xl sm:text-2xl">📋</span>
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-900">
               Task force
             </h1>
           </div>

@@ -15,15 +15,31 @@ const Files = () => {
   const initialSelectionMade = useRef(false);
 
   useEffect(() => {
+    const isDesktop = window.innerWidth >= 1024;
     if (
       FILES_DATA.length > 0 &&
       selectedFiles.length === 0 &&
+      isDesktop &&
       !initialSelectionMade.current
     ) {
       setSelectedFiles([FILES_DATA[0]]);
       initialSelectionMade.current = true;
     }
   }, [setSelectedFiles, selectedFiles.length]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isDesktop = window.innerWidth >= 1024;
+      if (!isDesktop && selectedFiles.length > 0) {
+        setSelectedFiles([]);
+      } else if (isDesktop && selectedFiles.length === 0 && FILES_DATA.length > 0) {
+        setSelectedFiles([FILES_DATA[0]]);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [selectedFiles.length, setSelectedFiles]);
 
   const handleSelect = (file, event) => {
     const isCtrlPressed = event.ctrlKey || event.metaKey;

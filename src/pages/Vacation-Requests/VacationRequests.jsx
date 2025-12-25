@@ -83,8 +83,8 @@ const VacationRequests = () => {
                 <img src="./open.png" width={25} height={25} alt="menu" />
               )}
             </button>
-            <span className="text-xl xs:text-2xl sm:text-4xl shrink-0">🏝️</span>
-            <h1 className="text-base xs:text-lg sm:text-2xl lg:text-3xl text-gray-900 truncate font-medium">
+            <span className="text-xl xs:text-2xl sm:text-3xl shrink-0">🏝️</span>
+            <h1 className="text-base xs:text-lg sm:text-2xl lg:text-2xl text-gray-900 truncate font-medium">
               Vacation requests
             </h1>
           </div>
