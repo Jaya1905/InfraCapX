@@ -66,11 +66,10 @@ const RightPanel = ({ selectedFiles, setSelectedFiles }) => {
         {/* TABS */}
         <div className="flex border-b border-gray-200">
           <span
-            className={`flex-1 flex flex-col items-center justify-center gap-1.5 py-2.5 text-sm cursor-pointer ${
-              activeTab === "Activity"
-                ? "border-b-[6px] border-[#00679f] font-extrabold text-gray-900"
-                : "text-gray-700"
-            }`}
+            className={`flex-1 flex flex-col items-center justify-center gap-1.5 py-2.5 text-sm cursor-pointer ${activeTab === "Activity"
+              ? "border-b-[6px] border-[#00679f] font-extrabold text-gray-900"
+              : "text-gray-700"
+              }`}
             onClick={() => setActiveTab("Activity")}
           >
             <span className="text-sm">
@@ -80,11 +79,10 @@ const RightPanel = ({ selectedFiles, setSelectedFiles }) => {
           </span>
 
           <span
-            className={`flex-1 flex flex-col items-center justify-center gap-1.5 py-2.5 text-sm cursor-pointer ${
-              activeTab === "Sharing"
-                ? "border-b-[6px] border-[#00679f] font-extrabold text-gray-900"
-                : "text-gray-700"
-            }`}
+            className={`flex-1 flex flex-col items-center justify-center gap-1.5 py-2.5 text-sm cursor-pointer ${activeTab === "Sharing"
+              ? "border-b-[6px] border-[#00679f] font-extrabold text-gray-900"
+              : "text-gray-700"
+              }`}
             onClick={() => setActiveTab("Sharing")}
           >
             <span className="text-sm">
@@ -275,11 +273,10 @@ const RightPanel = ({ selectedFiles, setSelectedFiles }) => {
             {/* TABS */}
             <div className="flex border-b border-gray-200 shrink-0">
               <span
-                className={`flex-1 flex flex-col items-center justify-center gap-1 py-2 text-xs xs:text-sm cursor-pointer ${
-                  activeTab === "Activity"
-                    ? "border-b-4 border-[#00679f] font-bold text-gray-900"
-                    : "text-gray-700"
-                }`}
+                className={`flex-1 flex flex-col items-center justify-center gap-1 py-2 text-xs xs:text-sm cursor-pointer ${activeTab === "Activity"
+                  ? "border-b-4 border-[#00679f] font-bold text-gray-900"
+                  : "text-gray-700"
+                  }`}
                 onClick={() => setActiveTab("Activity")}
               >
                 <BiSolidZap size={16} />
@@ -287,11 +284,10 @@ const RightPanel = ({ selectedFiles, setSelectedFiles }) => {
               </span>
 
               <span
-                className={`flex-1 flex flex-col items-center justify-center gap-1 py-2 text-xs xs:text-sm cursor-pointer ${
-                  activeTab === "Sharing"
-                    ? "border-b-4 border-[#00679f] font-bold text-gray-900"
-                    : "text-gray-700"
-                }`}
+                className={`flex-1 flex flex-col items-center justify-center gap-1 py-2 text-xs xs:text-sm cursor-pointer ${activeTab === "Sharing"
+                  ? "border-b-4 border-[#00679f] font-bold text-gray-900"
+                  : "text-gray-700"
+                  }`}
                 onClick={() => setActiveTab("Sharing")}
               >
                 <IoMdShare size={16} />
@@ -326,9 +322,23 @@ const RightPanel = ({ selectedFiles, setSelectedFiles }) => {
                   <IoIosInformationCircle className="text-[#065e9a]" size={18} />
                 </div>
 
-                <select className="w-full p-1.5 mb-2 border border-gray-400 rounded-md text-gray-500 text-xs xs:text-sm focus:outline-none">
-                  <option>Email, federated cloud id</option>
-                </select>
+                <div className="relative">
+                  <select className="w-full appearance-none bg-white p-1.5 mb-2 border border-gray-400 rounded-md text-gray-500 text-xs xs:text-sm focus:outline-none">
+                    <option>Email, federated cloud id</option>
+                  </select>
+
+                  <svg
+                    className="absolute right-3 top-[40%] -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none z-10"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
 
                 {EXTERNAL_SHARES.map((share) => (
                   <div
