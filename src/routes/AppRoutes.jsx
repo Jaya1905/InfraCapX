@@ -5,10 +5,12 @@ import Files from "../pages/Files/Files";
 import VacationRequests from "../pages/Vacation-Requests/VacationRequests";
 import Teams from "../pages/Teams/Teams";
 import TaskForce from "../pages/Task-Force/TaskForce";
+import Login from "../pages/Auth/Login";
 
 const AppRoutes = () => {
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Files />} />
         <Route path="files" element={<Files />} />
