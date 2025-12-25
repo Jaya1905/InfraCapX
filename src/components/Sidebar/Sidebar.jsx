@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
 import { GoFileDirectoryFill } from "react-icons/go";
 import { FaFile, FaUsers, FaCog } from "react-icons/fa";
+import { SidebarItem } from "./SidebarItem";
 
-const Sidebar = ({ collapsed }) => {
+const Sidebar = ({ collapsed, toggleSidebar }) => {
   return (
     <aside
       className={`
@@ -27,6 +27,7 @@ const Sidebar = ({ collapsed }) => {
           icon={<GoFileDirectoryFill />}
           text="All files"
           collapsed={collapsed}
+          toggleSidebar={toggleSidebar}
         />
 
         <SidebarItem
@@ -34,6 +35,7 @@ const Sidebar = ({ collapsed }) => {
           icon="🏝️"
           text="Vacation Requests"
           collapsed={collapsed}
+          toggleSidebar={toggleSidebar}
         />
 
         <SidebarItem
@@ -41,6 +43,7 @@ const Sidebar = ({ collapsed }) => {
           icon={<FaUsers />}
           text="Teams"
           collapsed={collapsed}
+          toggleSidebar={toggleSidebar}
         />
 
         <SidebarItem
@@ -48,39 +51,10 @@ const Sidebar = ({ collapsed }) => {
           icon={<FaFile />}
           text="Task Force"
           collapsed={collapsed}
+          toggleSidebar={toggleSidebar}
         />
       </ul>
     </aside>
-  );
-};
-
-const SidebarItem = ({ to, icon, text, collapsed }) => {
-  return (
-    <NavLink
-      to={to}
-      className={({ isActive }) =>
-        `
-        flex items-center
-        py-2.5 mx-2 my-0.5
-        text-sm font-medium
-        rounded-md
-        cursor-pointer
-        transition-all duration-300
-        ${collapsed ? "justify-center px-2 lg:justify-center lg:px-2" : "gap-3 px-4"}
-        ${
-          isActive
-            ? "bg-[#00669f] text-white"
-            : "text-gray-700 hover:bg-gray-200"
-        }
-      `
-      }
-    >
-      <span className="text-base shrink-0">{icon}</span>
-
-      {!collapsed && <span className="whitespace-nowrap">{text}</span>}
-
-      {collapsed && <span className="whitespace-nowrap lg:hidden">{text}</span>}
-    </NavLink>
   );
 };
 

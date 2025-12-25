@@ -46,24 +46,28 @@ const VacationRequests = () => {
     }, [tableData]);
 
     return (
-        <div className="flex flex-col lg:flex-row h-screen bg-gray-50 overflow-hidden">
-            {/* Main Content Area */}
-            <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-                {/* Page Header */}
-                <div className="bg-white border-b border-gray-200 px-2 xs:px-3 sm:px-6 py-2 xs:py-3 sm:py-4">
-                    <div className="flex items-center gap-1 xs:gap-2">
-                        <button
-                            onClick={toggleSidebar}
-                            className="p-1 hover:bg-gray-100 rounded-md transition-colors cursor-pointer flex-shrink-0"
-                        >
-                            {!sidebarCollapsed ? <MdMenuOpen size={24} className="sm:w-[30px] sm:h-[30px]" /> : <img src="./open.png" width={20} height={20} className="sm:w-[25px] sm:h-[25px]" />}
-                        </button>
-                        <span className="text-xl xs:text-2xl sm:text-4xl flex-shrink-0">🏝️</span>
-                        <h1 className="text-base xs:text-lg sm:text-2xl lg:text-3xl text-gray-900 truncate font-medium">
-                            Vacation requests
-                        </h1>
-                    </div>
-                </div>
+      <div className="flex flex-col lg:flex-row h-screen bg-gray-50">
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+          {/* Page Header */}
+          <div className="bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={toggleSidebar}
+                className="hidden lg:flex p-1 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
+              >
+                {!sidebarCollapsed ? (
+                  <MdMenuOpen size={30} />
+                ) : (
+                  <img src="./open.png" width={25} height={25} />
+                )}
+              </button>
+              <span className="text-2xl sm:text-4xl">🏝️</span>
+              <h1 className="text-xl sm:text-2xl lg:text-3xl text-gray-900 truncate">
+                Vacation requests
+              </h1>
+            </div>
+          </div>
 
                 {/* Views Section */}
                 <div className="bg-white border-b border-gray-200 px-2 xs:px-3 sm:px-6 py-2 xs:py-3 sm:py-4">
@@ -76,6 +80,50 @@ const VacationRequests = () => {
                         </button>
                     </div>
 
+            {/* Mobile Views - Card Layout */}
+            <div className="block lg:hidden space-y-2">
+              {viewsData.map((view, index) => (
+                <div
+                  key={index}
+                  className="p-3 rounded-lg border border-gray-200 hover:bg-gray-50"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      {view.name === "Create Vacation Request" && (
+                        <Plus color="purple" size={16} />
+                      )}
+                      {view.name === "Open Request" && (
+                        <FileTextIcon size={16} />
+                      )}
+                      {view.name === "Request Status" && (
+                        <LucideCircleQuestionMark size={16} />
+                      )}
+                      {view.name === "Closed requests" && (
+                        <CheckSquare2 fill="green" color="white" size={16} />
+                      )}
+                      <span className="text-sm font-medium text-gray-900 truncate">
+                        {view.name}
+                      </span>
+                    </div>
+                    <button className="text-gray-500 cursor-pointer hover:text-gray-600">
+                      <Ellipsis size={16} />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 text-xs text-gray-500">
+                    <span>Rows: {view.rows}</span>
+                    <span>Cols: {view.columns}</span>
+                    <span className="truncate">{view.lastEdited}</span>
+                  </div>
+                </div>
+              ))}
+              <div className="p-3 bg-gray-100 rounded-lg">
+                <div className="flex items-center gap-4">
+                  <span className="text-black font-bold text-base">Total</span>
+                  <span className="text-base text-black font-bold">4 rows</span>
+                  <span className="text-base text-black font-bold">9 cols</span>
+                </div>
+              </div>
+            </div>
                     {/* Mobile Views - Card Layout */}
                     <div className="block lg:hidden space-y-2">
                         {viewsData.map((view, index) => (
@@ -121,66 +169,72 @@ const VacationRequests = () => {
                         </div>
                     </div>
 
-                    {/* Desktop Views - Table Layout */}
-                    <div className="hidden lg:block overflow-x-auto">
-                        <table className="min-w-full text-sm">
-                            {/* Header */}
-                            <thead className="border-b border-gray-200 text-gray-500 font-medium">
-                                <tr>
-                                    <th className="px-2 py-2 text-left">View</th>
-                                    <th className="px-2 py-2 text-left">Rows</th>
-                                    <th className="px-2 py-2 text-left">Columns</th>
-                                    <th className="px-2 py-2 text-left">Last edited</th>
-                                    <th className="px-2 py-2 text-left">Shares</th>
-                                    <th className="px-2 py-2 text-left">Actions</th>
-                                </tr>
-                            </thead>
+            {/* Desktop Views - Table Layout */}
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="min-w-full text-sm">
+                {/* Header */}
+                <thead className="border-b border-gray-200 text-gray-500 font-medium">
+                  <tr>
+                    <th className="px-2 py-2 text-left">View</th>
+                    <th className="px-2 py-2 text-left">Rows</th>
+                    <th className="px-2 py-2 text-left">Columns</th>
+                    <th className="px-2 py-2 text-left">Last edited</th>
+                    <th className="px-2 py-2 text-left">Shares</th>
+                    <th className="px-2 py-2 text-left">Actions</th>
+                  </tr>
+                </thead>
 
-                            {/* Body */}
-                            <tbody>
-                                {viewsData.map((view, index) => (
-                                    <tr key={index} className="hover:bg-gray-50">
-                                        <td className="px-2 py-2">
-                                            <div className="flex items-center gap-2 min-w-0">
-                                                {view.name === "Create Vacation Request" && "➕"}
-                                                {view.name === "Open Request" && "📝"}
-                                                {view.name === "Request Status" && "❓"}
-                                                {view.name === "Closed requests" && "✅"}
-                                                <span className="text-gray-900 truncate">
-                                                    {view.name}
-                                                </span>
-                                            </div>
-                                        </td>
+                {/* Body */}
+                <tbody>
+                  {viewsData.map((view, index) => (
+                    <tr key={index} className="hover:bg-gray-50">
+                      <td className="px-2 py-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          {view.name === "Create Vacation Request" && "➕"}
+                          {view.name === "Open Request" && "📝"}
+                          {view.name === "Request Status" && "❓"}
+                          {view.name === "Closed requests" && "✅"}
+                          <span className="text-gray-900 truncate">
+                            {view.name}
+                          </span>
+                        </div>
+                      </td>
 
-                                        <td className="px-2 py-2 text-gray-600">{view.rows}</td>
-                                        <td className="px-2 py-2 text-gray-600">{view.columns}</td>
-                                        <td className="px-2 py-2 text-gray-600 truncate">
-                                            {view.lastEdited}
-                                        </td>
-                                        <td className="px-2 py-2"></td>
-                                        <td className="px-2 py-2">
-                                            <button className="text-gray-500 hover:text-gray-600">
-                                                <Ellipsis />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                      <td className="px-2 py-2 text-gray-600">{view.rows}</td>
+                      <td className="px-2 py-2 text-gray-600">
+                        {view.columns}
+                      </td>
+                      <td className="px-2 py-2 text-gray-600 truncate">
+                        {view.lastEdited}
+                      </td>
+                      <td className="px-2 py-2"></td>
+                      <td className="px-2 py-2">
+                        <button className="text-gray-500 hover:text-gray-600">
+                          <Ellipsis />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
 
-                            {/* Footer */}
-                            <tfoot>
-                                <tr className="border-t border-gray-200">
-                                    <td className="px-2 py-3 font-bold text-lg text-black">
-                                        Total
-                                    </td>
-                                    <td className="px-2 py-3 font-bold text-lg text-black">4</td>
-                                    <td className="px-2 py-3 font-bold text-lg text-black">9</td>
-                                    <td colSpan={3}></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
+                {/* Footer */}
+                <tfoot>
+                  <tr className="border-t border-gray-200">
+                    <td className="px-2 py-3 font-bold text-lg text-black">
+                      Total
+                    </td>
+                    <td className="px-2 py-3 font-bold text-lg text-black">
+                      4
+                    </td>
+                    <td className="px-2 py-3 font-bold text-lg text-black">
+                      9
+                    </td>
+                    <td colSpan={3}></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
 
                 {/* Data Section */}
                 <div className="flex-1 bg-white px-2 xs:px-3 sm:px-6 py-2 xs:py-3 sm:py-4 overflow-auto min-h-0">
@@ -292,164 +346,164 @@ const VacationRequests = () => {
                         ))}
                     </div>
 
-                    {/* Desktop Data - Table Layout */}
-                    <div className="hidden lg:block overflow-x-auto">
-                        <table className="min-w-full text-sm  border-gray-200 border-collapse">
-                            {/* Header */}
-                            <thead className="text-gray-500 font-medium">
-                                <tr>
-                                    <th className="px-2 py-2 text-left">
-                                        <input type="checkbox" />
-                                    </th>
-                                    <th className="px-2 py-2 text-left">Comments</th>
-                                    <th className="px-2 py-2 text-left">Approved by</th>
-                                    <th className="px-2 py-2 text-left">Approve date</th>
-                                    <th className="px-2 py-2 text-left">Approved</th>
-                                    <th className="px-2 py-2 text-left">Request date</th>
-                                    <th className="px-2 py-2 text-left">
-                                        <Ellipsis className="text-gray-400" />
-                                    </th>
-                                </tr>
-                            </thead>
+            {/* Desktop Data - Table Layout */}
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="min-w-full text-sm  border-gray-200 border-collapse">
+                {/* Header */}
+                <thead className="text-gray-500 font-medium">
+                  <tr>
+                    <th className="px-2 py-2 text-left">
+                      <input type="checkbox" />
+                    </th>
+                    <th className="px-2 py-2 text-left">Comments</th>
+                    <th className="px-2 py-2 text-left">Approved by</th>
+                    <th className="px-2 py-2 text-left">Approve date</th>
+                    <th className="px-2 py-2 text-left">Approved</th>
+                    <th className="px-2 py-2 text-left">Request date</th>
+                    <th className="px-2 py-2 text-left">
+                      <Ellipsis className="text-gray-400" />
+                    </th>
+                  </tr>
+                </thead>
 
-                            {/* Body */}
-                            <tbody>
-                                {tableData.map((row) => (
-                                    <tr
-                                        key={row.id}
-                                        className="hover:bg-gray-50 cursor-pointer"
-                                        onClick={() => handleRowSelect(row.id)}
-                                    >
-                                        <td className="border border-gray-200 px-2 py-3">
-                                            <input
-                                                type="checkbox"
-                                                checked={selectedRows.includes(row.id)}
-                                                onChange={() => handleRowSelect(row.id)}
-                                                onClick={(e) => e.stopPropagation()}
-                                            />
-                                        </td>
+                {/* Body */}
+                <tbody>
+                  {tableData.map((row) => (
+                    <tr
+                      key={row.id}
+                      className="hover:bg-gray-50 cursor-pointer"
+                      onClick={() => handleRowSelect(row.id)}
+                    >
+                      <td className="border border-gray-200 px-2 py-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedRows.includes(row.id)}
+                          onChange={() => handleRowSelect(row.id)}
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      </td>
 
-                                        <td className="border border-gray-200 px-2 py-3 text-gray-900 truncate max-w-xs">
-                                            {row.comments}
-                                        </td>
+                      <td className="border border-gray-200 px-2 py-3 text-gray-900 truncate max-w-xs">
+                        {row.comments}
+                      </td>
 
-                                        <td className="border border-gray-200 px-2 py-3 text-gray-600">
-                                            {row.approvedBy}
-                                        </td>
+                      <td className="border border-gray-200 px-2 py-3 text-gray-600">
+                        {row.approvedBy}
+                      </td>
 
-                                        <td className="border border-gray-200 px-2 py-3 text-gray-600">
-                                            {row.approveDate}
-                                        </td>
+                      <td className="border border-gray-200 px-2 py-3 text-gray-600">
+                        {row.approveDate}
+                      </td>
 
-                                        <td className="border border-gray-200 px-2 py-3">
-                                            {row.approved ? (
-                                                <FaRegCheckCircle size={20} />
-                                            ) : (
-                                                <Circle size={20} />
-                                            )}
-                                        </td>
+                      <td className="border border-gray-200 px-2 py-3">
+                        {row.approved ? (
+                          <FaRegCheckCircle size={20} />
+                        ) : (
+                          <Circle size={20} />
+                        )}
+                      </td>
 
-                                        <td className="border border-gray-200 px-2 py-3 text-gray-600">
-                                            {row.requestDate}
-                                        </td>
+                      <td className="border border-gray-200 px-2 py-3 text-gray-600">
+                        {row.requestDate}
+                      </td>
 
-                                        <td className="border border-gray-200 px-2 py-3">
-                                            <button
-                                                className="text-gray-400 hover:text-gray-600"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <Ellipsis />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                      <td className="border border-gray-200 px-2 py-3">
+                        <button
+                          className="text-gray-400 hover:text-gray-600"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Ellipsis />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Right Panel */}
+        {showRightPanel && (
+          <div className="hidden lg:flex w-80 xl:w-96 bg-white border-l border-gray-200 flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h3 className="text-xl font-medium text-gray-900">
+                🏝️ Vacation requests
+              </h3>
+              <button
+                onClick={() => {
+                  setSelectedRows([]);
+                  setShowRightPanel(false);
+                }}
+                className="text-gray-400 hover:text-gray-600 cursor-pointer"
+              >
+                <X />
+              </button>
             </div>
 
-            {/* Desktop Right Panel */}
-            {showRightPanel && (
-                <div className="hidden lg:flex w-80 xl:w-96 bg-white border-l border-gray-200 flex-col">
-                    <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                        <h3 className="text-xl font-medium text-gray-900">
-                            🏝️ Vacation requests
-                        </h3>
-                        <button
-                            onClick={() => {
-                                setSelectedRows([]);
-                                setShowRightPanel(false);
-                            }}
-                            className="text-gray-400 hover:text-gray-600 cursor-pointer"
-                        >
-                            <X />
-                        </button>
-                    </div>
+            <div className="flex-1 p-4 overflow-auto">
+              <div className="space-y-3 mb-6 text-gray-500">
+                <p className="flex gap-5">
+                  <span className="font-medium">Created at:</span>
+                  {selectedRows.length > 0
+                    ? tableData.find((row) => row.id === selectedRows[0])
+                        ?.requestDate || "Jan 28, 2025 11:17 AM"
+                    : "Jan 28, 2025 11:17 AM"}
+                </p>
+                <p className="flex gap-5">
+                  <span className="font-medium">Ownership:</span>
+                  <span className="flex items-center gap-2 bg-gray-200 py-1 px-2 rounded-full">
+                    <img
+                      src="https://mockmind-api.uifaces.co/content/human/80.jpg"
+                      className="h-5 w-5 rounded-full"
+                      alt="avatar"
+                    />
+                    <p>Joe</p>
+                  </span>
+                </p>
+                <p className="flex gap-5">
+                  <span className="font-medium">Table ID:</span> 96
+                </p>
+              </div>
 
-                    <div className="flex-1 p-4 overflow-auto">
-                        <div className="space-y-3 mb-6 text-gray-500">
-                            <p className="flex gap-5">
-                                <span className="font-medium">Created at:</span>
-                                {selectedRows.length > 0
-                                    ? tableData.find((row) => row.id === selectedRows[0])
-                                        ?.requestDate || "Jan 28, 2025 11:17 AM"
-                                    : "Jan 28, 2025 11:17 AM"}
-                            </p>
-                            <p className="flex gap-5">
-                                <span className="font-medium">Ownership:</span>
-                                <span className="flex items-center gap-2 bg-gray-200 py-1 px-2 rounded-full">
-                                    <img
-                                        src="https://mockmind-api.uifaces.co/content/human/80.jpg"
-                                        className="h-5 w-5 rounded-full"
-                                        alt="avatar"
-                                    />
-                                    <p>Joe</p>
-                                </span>
-                            </p>
-                            <p className="flex gap-5">
-                                <span className="font-medium">Table ID:</span> 96
-                            </p>
-                        </div>
+              <div className="tabs">
+                <span
+                  className={`tab ${activeTab === "Activity" ? "active" : ""} flex flex-col`}
+                  onClick={() => setActiveTab("Activity")}
+                >
+                  <span className="tab-icon">
+                    <HiUserAdd size={20} />
+                  </span>
+                  Sharing
+                </span>
 
-                        <div className="tabs">
-                            <span
-                                className={`tab ${activeTab === "Activity" ? "active" : ""} flex flex-col`}
-                                onClick={() => setActiveTab("Activity")}
-                            >
-                                <span className="tab-icon">
-                                    <HiUserAdd size={20} />
-                                </span>
-                                Sharing
-                            </span>
+                <span
+                  className={`tab ${activeTab === "Sharing" ? "active" : ""} flex flex-col`}
+                  onClick={() => setActiveTab("Sharing")}
+                >
+                  <span className="tab-icon">
+                    <PiPlugsConnectedFill size={20} />
+                  </span>
+                  Integration
+                </span>
+              </div>
 
-                            <span
-                                className={`tab ${activeTab === "Sharing" ? "active" : ""} flex flex-col`}
-                                onClick={() => setActiveTab("Sharing")}
-                            >
-                                <span className="tab-icon">
-                                    <PiPlugsConnectedFill size={20} />
-                                </span>
-                                Integration
-                            </span>
-                        </div>
-
-                        <div className="space-y-4 mt-5">
-                            <h4 className="font-medium text-gray-900 text-[17px]">
-                                Share with accounts, groups or teams
-                            </h4>
-                            <div className="flex gap-2">
-                                <input
-                                    type="text"
-                                    placeholder="mana"
-                                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                            </div>
-                            <p className="text-sm text-gray-500">No shares</p>
-                        </div>
-                    </div>
+              <div className="space-y-4 mt-5">
+                <h4 className="font-medium text-gray-900 text-[17px]">
+                  Share with accounts, groups or teams
+                </h4>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="mana"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
                 </div>
-            )}
+                <p className="text-sm text-gray-500">No shares</p>
+              </div>
+            </div>
+          </div>
+        )}
 
             {/* Mobile Right Panel - Modal */}
             {showRightPanel && (

@@ -31,7 +31,7 @@ const MainLayout = () => {
       <Header toggleSidebar={toggleSidebar} />
 
       <div className="main-body">
-        <Sidebar collapsed={sidebarCollapsed} />
+        <Sidebar collapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
 
         <div
           className={`content-area ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}

@@ -44,9 +44,13 @@ const Files = () => {
         <div className="breadcrumb-row gap-5">
           <button
             onClick={toggleSidebar}
-            className="p-1 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
+            className="hidden lg:flex p-1 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
           >
-            {!sidebarCollapsed ? <MdMenuOpen size={30} /> : <img src="./open.png" width={25} height={25} />}
+            {!sidebarCollapsed ? (
+              <MdMenuOpen size={30} />
+            ) : (
+              <img src="./open.png" width={25} height={25} />
+            )}
           </button>
 
           <div className="breadcrumb">
