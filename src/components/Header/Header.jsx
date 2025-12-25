@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaFolder,
   FaHeart,
@@ -16,8 +16,10 @@ import { RiSearchLine } from "react-icons/ri";
 import { HiMenu } from "react-icons/hi";
 
 const Header = ({ toggleSidebar }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <header className="h-14 bg-[#00679f] flex items-center justify-between px-4">
+    <header className="relative h-14 bg-[#00679f] flex items-center justify-between px-4">
       <div className="flex items-center gap-4 sm:gap-10">
         <button
           onClick={toggleSidebar}
@@ -33,7 +35,6 @@ const Header = ({ toggleSidebar }) => {
           <Icon>
             <img src="./kanbase.png" alt="logo" className="w-5 h-5" />
           </Icon>
-
           <Icon>
             <RiSearchLine size={20} />
           </Icon>
@@ -61,7 +62,7 @@ const Header = ({ toggleSidebar }) => {
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 relative">
         <Icon className="sm:hidden">
           <IoSearchSharp size={20} />
         </Icon>
@@ -76,15 +77,37 @@ const Header = ({ toggleSidebar }) => {
           <Icon>
             <IoIosNotifications size={20} />
           </Icon>
+          <Icon>
+            <MdOutlineContacts size={20} />
+          </Icon>
         </div>
-
-        <Icon>
-          <MdOutlineContacts size={20} />
-        </Icon>
 
         <button className="w-8.5 h-8.5 rounded-full flex items-center justify-center text-white bg-white/25 hover:bg-white/35">
           <FaUserAlt />
         </button>
+
+        <button
+          onClick={() => setOpen(!open)}
+          className="sm:hidden w-8.5 h-8.5 rounded-full flex items-center justify-center text-white hover:bg-white/15"
+        >
+          ⋮
+        </button>
+
+        {open && (
+          <div className="sm:hidden absolute right-0 top-14 bg-white rounded-lg shadow-lg w-56 py-2 z-50">
+            <DropdownItem icon={<RiSearchLine />} text="Search" />
+            <DropdownItem icon={<FaFolder />} text="Files" />
+            <DropdownItem icon={<FaImage />} text="Images" />
+            <DropdownItem icon={<BiSolidZap />} text="Zap" />
+            <DropdownItem icon={<IoMdMail />} text="Mail" />
+            <DropdownItem icon={<FaHeart />} text="Favorites" />
+            <DropdownItem icon={<FaUserFriends />} text="Friends" />
+            <DropdownItem icon={<FaRegCalendar />} text="Calendar" />
+            <DropdownItem icon={<WiStars />} text="Stars" />
+            <DropdownItem icon={<IoIosNotifications />} text="Notifications" />
+            <DropdownItem icon={<MdOutlineContacts />} text="Contacts" />
+          </div>
+        )}
       </div>
     </header>
   );
@@ -96,6 +119,13 @@ const Icon = ({ children, className = "" }) => (
   >
     {children}
   </button>
+);
+
+const DropdownItem = ({ icon, text }) => (
+  <div className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+    <span className="text-base">{icon}</span>
+    <span>{text}</span>
+  </div>
 );
 
 export default Header;
