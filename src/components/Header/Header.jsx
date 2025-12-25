@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   FaFolder,
   FaHeart,
@@ -15,9 +15,26 @@ import { BiSolidZap } from "react-icons/bi";
 import { RiSearchLine } from "react-icons/ri";
 import { HiMenu } from "react-icons/hi";
 
-const Header = ({ toggleSidebar }) => {
-  const [open, setOpen] = useState(false);
+const Header = ({ toggleSidebar, dropdownOpen, toggleDropdown }) => {
+  const dropdownRef = useRef(null);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        if (dropdownOpen) {
+          toggleDropdown();
+        }
+      }
+    };
+
+    if (dropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen, toggleDropdown]);
   return (
     <header className="relative h-14 bg-[#00679f] flex items-center justify-between px-4">
       <div className="flex items-center gap-4 sm:gap-10">
@@ -62,7 +79,7 @@ const Header = ({ toggleSidebar }) => {
         </div>
       </div>
 
-      <div className="flex items-center gap-3 relative">
+      <div className="flex items-center gap-3 relative" ref={dropdownRef}>
         <Icon className="sm:hidden">
           <IoSearchSharp size={20} />
         </Icon>
@@ -87,13 +104,13 @@ const Header = ({ toggleSidebar }) => {
         </button>
 
         <button
-          onClick={() => setOpen(!open)}
+          onClick={toggleDropdown}
           className="sm:hidden w-8.5 h-8.5 rounded-full flex items-center justify-center text-white hover:bg-white/15"
         >
           ⋮
         </button>
 
-        {open && (
+        {dropdownOpen && (
           <div className="sm:hidden absolute right-0 top-14 bg-white rounded-lg shadow-lg w-56 py-2 z-50">
             <DropdownItem icon={<RiSearchLine />} text="Search" />
             <DropdownItem icon={<FaFolder />} text="Files" />
