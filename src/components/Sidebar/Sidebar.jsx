@@ -1,5 +1,5 @@
 import { GoFileDirectoryFill } from "react-icons/go";
-import { FaFile, FaUsers, FaCog } from "react-icons/fa";
+import { FaFile, FaUsers } from "react-icons/fa";
 import { SidebarItem } from "./SidebarItem";
 
 const Sidebar = ({ collapsed, toggleSidebar }) => {
@@ -23,7 +23,7 @@ const Sidebar = ({ collapsed, toggleSidebar }) => {
     >
       <ul className="list-none p-0 m-0">
         <SidebarItem
-          to="/files"
+          to="/"
           icon={<GoFileDirectoryFill />}
           text="All files"
           collapsed={collapsed}
