@@ -46,28 +46,28 @@ const VacationRequests = () => {
     }, [tableData]);
 
     return (
-      <div className="flex flex-col lg:flex-row h-screen bg-gray-50">
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-          {/* Page Header */}
-          <div className="bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={toggleSidebar}
-                className="hidden lg:flex p-1 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
-              >
-                {!sidebarCollapsed ? (
-                  <MdMenuOpen size={30} />
-                ) : (
-                  <img src="./open.png" width={25} height={25} />
-                )}
-              </button>
-              <span className="text-2xl sm:text-4xl">🏝️</span>
-              <h1 className="text-xl sm:text-2xl lg:text-3xl text-gray-900 truncate">
-                Vacation requests
-              </h1>
-            </div>
-          </div>
+        <div className="flex flex-col lg:flex-row h-screen bg-gray-50 overflow-hidden">
+            {/* Main Content Area */}
+            <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+                {/* Page Header */}
+                <div className="bg-white border-b border-gray-200 px-2 xs:px-3 sm:px-6 py-2 xs:py-3 sm:py-4">
+                    <div className="flex items-center gap-1 xs:gap-2">
+                        <button
+                            onClick={toggleSidebar}
+                            className="hidden lg:flex p-1 hover:bg-gray-100 rounded-md transition-colors cursor-pointer shrink-0"
+                        >
+                            {!sidebarCollapsed ? (
+                                <MdMenuOpen size={24} className="sm:w-7.5 sm:h-7.5" />
+                            ) : (
+                                <img src="./open.png" width={20} height={20} className="sm:w-6.25 sm:h-6.25" alt="menu" />
+                            )}
+                        </button>
+                        <span className="text-xl xs:text-2xl sm:text-4xl shrink-0">🏝️</span>
+                        <h1 className="text-base xs:text-lg sm:text-2xl lg:text-3xl text-gray-900 truncate font-medium">
+                            Vacation requests
+                        </h1>
+                    </div>
+                </div>
 
                 {/* Views Section */}
                 <div className="bg-white border-b border-gray-200 px-2 xs:px-3 sm:px-6 py-2 xs:py-3 sm:py-4">
@@ -80,50 +80,6 @@ const VacationRequests = () => {
                         </button>
                     </div>
 
-            {/* Mobile Views - Card Layout */}
-            <div className="block lg:hidden space-y-2">
-              {viewsData.map((view, index) => (
-                <div
-                  key={index}
-                  className="p-3 rounded-lg border border-gray-200 hover:bg-gray-50"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      {view.name === "Create Vacation Request" && (
-                        <Plus color="purple" size={16} />
-                      )}
-                      {view.name === "Open Request" && (
-                        <FileTextIcon size={16} />
-                      )}
-                      {view.name === "Request Status" && (
-                        <LucideCircleQuestionMark size={16} />
-                      )}
-                      {view.name === "Closed requests" && (
-                        <CheckSquare2 fill="green" color="white" size={16} />
-                      )}
-                      <span className="text-sm font-medium text-gray-900 truncate">
-                        {view.name}
-                      </span>
-                    </div>
-                    <button className="text-gray-500 cursor-pointer hover:text-gray-600">
-                      <Ellipsis size={16} />
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 text-xs text-gray-500">
-                    <span>Rows: {view.rows}</span>
-                    <span>Cols: {view.columns}</span>
-                    <span className="truncate">{view.lastEdited}</span>
-                  </div>
-                </div>
-              ))}
-              <div className="p-3 bg-gray-100 rounded-lg">
-                <div className="flex items-center gap-4">
-                  <span className="text-black font-bold text-base">Total</span>
-                  <span className="text-base text-black font-bold">4 rows</span>
-                  <span className="text-base text-black font-bold">9 cols</span>
-                </div>
-              </div>
-            </div>
                     {/* Mobile Views - Card Layout */}
                     <div className="block lg:hidden space-y-2">
                         {viewsData.map((view, index) => (
@@ -133,7 +89,7 @@ const VacationRequests = () => {
                             >
                                 <div className="flex items-center justify-between mb-2">
                                     <div className="flex items-center gap-1.5 xs:gap-2 min-w-0 flex-1">
-                                        <span className="flex-shrink-0">
+                                        <span className="shrink-0">
                                             {view.name === "Create Vacation Request" && (
                                                 <Plus color="purple" size={14} className="xs:w-4 xs:h-4" />
                                             )}
@@ -149,7 +105,7 @@ const VacationRequests = () => {
                                             {view.name}
                                         </span>
                                     </div>
-                                    <button className="text-gray-500 cursor-pointer hover:text-gray-600 p-1 flex-shrink-0">
+                                    <button className="text-gray-500 cursor-pointer hover:text-gray-600 p-1 shrink-0">
                                         <Ellipsis size={14} className="xs:w-4 xs:h-4" />
                                     </button>
                                 </div>
@@ -258,7 +214,7 @@ const VacationRequests = () => {
                                 className="w-full xs:w-48 sm:w-64 pl-7 xs:pl-8 pr-3 py-2 font-bold rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200"
                             />
                             <span className="absolute left-2 text-gray-400 flex justify-center items-center">
-                                <Search size={14} className="xs:w-[15px] xs:h-[15px]" />
+                                <Search size={14} className="xs:w-3.75 xs:h-3.75" />
                             </span>
                         </div>
                     </div>
@@ -518,7 +474,7 @@ const VacationRequests = () => {
                         className="absolute right-0 top-0 h-full w-full xs:w-[85%] max-w-sm bg-white shadow-xl flex flex-col animate-slide-in-right"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="flex items-center justify-between p-3 xs:p-4 border-b border-gray-200 flex-shrink-0">
+                        <div className="flex items-center justify-between p-3 xs:p-4 border-b border-gray-200 shrink-0">
                             <h3 className="text-base xs:text-lg font-medium text-gray-900 flex items-center gap-2">
                                 <span>🏝️</span>
                                 <span className="truncate">Vacation requests</span>

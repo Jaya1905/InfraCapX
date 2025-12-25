@@ -54,7 +54,7 @@ const TaskForce = () => {
         {/* Modal Overlay */}
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
           {/* Modal */}
-          <div className="bg-white w-full max-w-4xl max-h-[90vh] rounded-lg shadow-xl overflow-hidden">
+          <div className="bg-white w-full max-w-4xl max-h-[90vh] rounded-lg shadow-xl overflow-hidden flex flex-col">
             {/* Header */}
             <div className="relative flex items-center px-4 sm:px-6 py-4 border-b">
               {/* Center title */}
@@ -72,7 +72,7 @@ const TaskForce = () => {
             </div>
 
             {/* Body */}
-            <div className="px-4 sm:px-6 py-5 max-h-[calc(90vh-140px)] overflow-y-auto">
+            <div className="px-4 sm:px-6 py-5 flex-1 overflow-y-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* LEFT COLUMN */}
                 <div className="space-y-5">
@@ -218,14 +218,14 @@ const TaskForce = () => {
             </div>
 
             {/* Footer */}
-            <div className="flex flex-col sm:flex-row items-center px-4 sm:px-6 py-4 border-t gap-4 sm:gap-6 sm:justify-end">
+            <div className="flex flex-col sm:flex-row items-center px-4 sm:px-6 py-4 pb-8 sm:pb-4 border-t gap-4 sm:gap-6 sm:justify-end shrink-0">
               <ToggleInline
                 label="Add more"
                 value={formData.addMore}
                 onClick={() => toggle("addMore")}
               />
 
-              <button className="w-full sm:w-auto bg-[#00669f] text-white px-6 py-2 rounded-md font-medium hover:bg-[#005a8c] transition-colors">
+              <button className="w-full sm:w-auto bg-[#00669f] text-white px-4 sm:px-6 py-2 rounded-md font-medium hover:bg-[#005a8c] transition-colors">
                 Save
               </button>
             </div>
