@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
-import "./mainlayout.css";
 
 const MainLayout = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -16,7 +15,6 @@ const MainLayout = () => {
     };
 
     handleResize();
-
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
@@ -27,14 +25,20 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className="h-screen flex flex-col bg-[#00679f]">
       <Header toggleSidebar={toggleSidebar} />
 
-      <div className="main-body">
+      <div className="flex-1 flex overflow-hidden px-3.75 pb-3.75">
         <Sidebar collapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
 
         <div
-          className={`content-area ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}
+          className={`
+            flex-1
+            bg-white
+            border-x border-gray-200
+            overflow-y-auto
+            transition-all duration-300
+          `}
         >
           <Outlet
             context={{
