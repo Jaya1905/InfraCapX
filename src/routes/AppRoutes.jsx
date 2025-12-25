@@ -6,6 +6,7 @@ import VacationRequests from "../pages/Vacation-Requests/VacationRequests";
 import Teams from "../pages/Teams/Teams";
 import TaskForce from "../pages/Task-Force/TaskForce";
 import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
 import ResetPassword from "../pages/Auth/ResetPassword";
 import ChangePassword from "../pages/Auth/ChangePassword";
 
