@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import { FILES_DATA } from "../../utils/constants";
 import RightPanel from "../../components/RightPanel/RightPanel";
@@ -7,16 +7,22 @@ import { GoFileDirectoryFill } from "react-icons/go";
 import { MdMenuOpen, MdOutlineInsertLink } from "react-icons/md";
 import { FaAngleRight, FaFile, FaRegCalendarAlt } from "react-icons/fa";
 import { HiUserAdd, HiUsers } from "react-icons/hi";
-import { RiFolderZipFill } from "react-icons/ri";
 import { FaEllipsis } from "react-icons/fa6";
 import { BiPlus } from "react-icons/bi";
 
 const Files = () => {
-  const { selectedFiles, setSelectedFiles, toggleSidebar, sidebarCollapsed } = useOutletContext();
+  const { selectedFiles, setSelectedFiles, toggleSidebar, sidebarCollapsed } =
+    useOutletContext();
+  const initialSelectionMade = useRef(false);
 
   useEffect(() => {
-    if (FILES_DATA.length > 0 && selectedFiles.length === 0) {
+    if (
+      FILES_DATA.length > 0 &&
+      selectedFiles.length === 0 &&
+      !initialSelectionMade.current
+    ) {
       setSelectedFiles([FILES_DATA[0]]);
+      initialSelectionMade.current = true;
     }
   }, [setSelectedFiles, selectedFiles.length]);
 
@@ -214,7 +220,12 @@ const Files = () => {
       </div>
 
       {/* Right Panel */}
-      <RightPanel selectedFiles={selectedFiles} />
+      {selectedFiles.length > 0 && (
+        <RightPanel
+          selectedFiles={selectedFiles}
+          setSelectedFiles={setSelectedFiles}
+        />
+      )}
     </div>
   );
 };

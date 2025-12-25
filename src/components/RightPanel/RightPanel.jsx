@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./rightpanel.css";
 import { BsStarFill } from "react-icons/bs";
 import { Ellipsis, EllipsisIcon, X } from "lucide-react";
@@ -19,25 +19,15 @@ const EXTERNAL_SHARES = [
   { id: 2, label: "joeuser@domain.tld", permission: "Can edit" },
 ];
 
-const PERMISSIONS = [
-  "Read",
-  "Write",
-  "Create",
-  "Delete",
-  "Share",
-];
+const PERMISSIONS = ["Read", "Write", "Create", "Delete", "Share"];
 
-const RightPanel = ({ selectedFiles }) => {
+const RightPanel = ({ selectedFiles, setSelectedFiles }) => {
   const [activeTab, setActiveTab] = useState("Sharing");
   const [openResources, setOpenResources] = useState(true);
 
-  if (selectedFiles.length !== 1) {
-    return (
-      <aside className="right-panel">
-        <p className="empty-state">Select a single item to see details</p>
-      </aside>
-    );
-  }
+  const handleClose = () => {
+    setSelectedFiles([]);
+  };
 
   const file = selectedFiles[0];
 
@@ -48,10 +38,26 @@ const RightPanel = ({ selectedFiles }) => {
         <div>
           <h3>{file.name}</h3>
           <p className="meta flex items-center gap-1">
-            <BsStarFill /> {file.size} · {file.modified} · Owner <strong className="name_bg flex gap-1 items-center"><img src="https://mockmind-api.uifaces.co/content/human/80.jpg" className="h-5 w-5 rounded-full" alt="avatar" />Christine...</strong>
+            <BsStarFill /> {file.size} · {file.modified} · Owner{" "}
+            <strong className="name_bg flex gap-1 items-center">
+              <img
+                src="https://mockmind-api.uifaces.co/content/human/80.jpg"
+                className="h-5 w-5 rounded-full"
+                alt="avatar"
+              />
+              Christine...
+            </strong>
           </p>
         </div>
-        <div className="header-actions flex items-center gap-2"><Ellipsis /> <X /></div>
+        <div className="header-actions flex items-center gap-2">
+          <Ellipsis />
+          <button
+            onClick={handleClose}
+            className="text-gray-400 hover:text-gray-600 cursor-pointer"
+          >
+            <X />
+          </button>
+        </div>
       </div>
 
       {/* ===== TABS ===== */}
@@ -60,7 +66,9 @@ const RightPanel = ({ selectedFiles }) => {
           className={`tab ${activeTab === "Activity" ? "active" : ""} flex flex-col`}
           onClick={() => setActiveTab("Activity")}
         >
-          <span className="tab-icon"><BiSolidZap size={20} /></span>
+          <span className="tab-icon">
+            <BiSolidZap size={20} />
+          </span>
           Activity
         </span>
 
@@ -68,25 +76,30 @@ const RightPanel = ({ selectedFiles }) => {
           className={`tab ${activeTab === "Sharing" ? "active" : ""} flex flex-col`}
           onClick={() => setActiveTab("Sharing")}
         >
-          <span className="tab-icon"><IoMdShare size={20} /></span>
+          <span className="tab-icon">
+            <IoMdShare size={20} />
+          </span>
           Sharing
         </span>
       </div>
-
 
       {/* ===== SCROLLABLE BODY ===== */}
       <div className="panel-body">
         {/* INTERNAL LINK */}
         <div className="section">
           <div className="row">
-            <span className="icon circle circle-grey flex justify-center items-center text-white"><RiShareBoxFill size={20} /></span>
+            <span className="icon circle circle-grey flex justify-center items-center text-white">
+              <RiShareBoxFill size={20} />
+            </span>
             <div>
               <strong className="muted-head">Internal link</strong>
               <p className="muted">
                 Only works for people with access to this folder
               </p>
             </div>
-            <span className="copy"><MdOutlineContentCopy size={20} /></span>
+            <span className="copy">
+              <MdOutlineContentCopy size={20} />
+            </span>
           </div>
         </div>
 
@@ -94,7 +107,9 @@ const RightPanel = ({ selectedFiles }) => {
         <div className="section">
           <div className="section-header flex items-center gap-1">
             <span>External shares</span>
-            <span className="info"><IoIosInformationCircle className="theme-color" size={20} /></span>
+            <span className="info">
+              <IoIosInformationCircle className="theme-color" size={20} />
+            </span>
           </div>
 
           <select className="share-input">
@@ -102,27 +117,36 @@ const RightPanel = ({ selectedFiles }) => {
           </select>
 
           {EXTERNAL_SHARES.map((share) => (
-            <div key={share.id} className="share-row flex justify-between items-center">
+            <div
+              key={share.id}
+              className="share-row flex justify-between items-center"
+            >
               <div className="share-row">
-                <span className="icon circle circle-blue flex justify-center items-center text-white"><MdOutlineInsertLink size={20} /></span>
+                <span className="icon circle circle-blue flex justify-center items-center text-white">
+                  <MdOutlineInsertLink size={20} />
+                </span>
                 <div className="share-info">
                   <strong>{share.label}</strong>
-                    <div className="flex items-center gap-1">
-                      <p className="permission theme-color">{share.permission}</p>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-2 w-2" 
-                        viewBox="0 0 10 6"
-                        fill="#065e9a"
-                      >
-                        <polygon points="0,0 10,0 5,6" />
-                      </svg>
-                    </div>                  
+                  <div className="flex items-center gap-1">
+                    <p className="permission theme-color">{share.permission}</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-2 w-2"
+                      viewBox="0 0 10 6"
+                      fill="#065e9a"
+                    >
+                      <polygon points="0,0 10,0 5,6" />
+                    </svg>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="copy"><MdOutlineContentCopy size={20} /></span>
-                <span className="more"><EllipsisIcon size={20} /></span>
+                <span className="copy">
+                  <MdOutlineContentCopy size={20} />
+                </span>
+                <span className="more">
+                  <EllipsisIcon size={20} />
+                </span>
               </div>
             </div>
           ))}
@@ -132,22 +156,32 @@ const RightPanel = ({ selectedFiles }) => {
         <div className="section border-bottom">
           <div className="section-header flex items-center gap-1">
             <span>Additional shares</span>
-            <span className="info theme-color"><IoIosInformationCircle size={20} /></span>
+            <span className="info theme-color">
+              <IoIosInformationCircle size={20} />
+            </span>
           </div>
         </div>
 
         {/* RELATED TEAM RESOURCES */}
         <div className="realted_team">
-          <h2 >Related team resources</h2>
+          <h2>Related team resources</h2>
           <div className="section boxed">
             <div
               className="section-header clickable flex justify-between items-center gap-4"
               onClick={() => setOpenResources(!openResources)}
             >
-              <span className="flex items-center gap-2"><FaUsers size={20} /> {RELATED_RESOURCES.name}</span>
+              <span className="flex items-center gap-2">
+                <FaUsers size={20} /> {RELATED_RESOURCES.name}
+              </span>
               <div className="flex justify-center items-center gap-3">
                 <RiShareBoxLine size={20} />
-                <span>{openResources ? <FaAngleUp size={20} /> : <FaAngleDown size={20} />}</span>
+                <span>
+                  {openResources ? (
+                    <FaAngleUp size={20} />
+                  ) : (
+                    <FaAngleDown size={20} />
+                  )}
+                </span>
               </div>
             </div>
             {openResources && (
@@ -171,20 +205,20 @@ const RightPanel = ({ selectedFiles }) => {
           </div>
         </div>
 
-
         {/* PERMISSIONS */}
-        {/* <div className="permissions flex items-center">
-          <span className="team gap-1">
+        <div className="permissions flex justify-between items-center">
+          <span className="team flex items-center gap-2">
             <span className="bg-[#065e9a] p-2 rounded-full flex justify-center items-center">
-            <FaUserFriends color="white" size={20} /> 
-            </span>Team folder
+              <FaUserFriends color="white" size={20} />
+            </span>
+            Team folder
           </span>
           <div className="perm-list">
             {PERMISSIONS.map((p) => (
               <span key={p}>{p}</span>
             ))}
           </div>
-        </div> */}
+        </div>
       </div>
     </aside>
   );
