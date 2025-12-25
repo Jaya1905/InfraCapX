@@ -7,12 +7,14 @@ import Teams from "../pages/Teams/Teams";
 import TaskForce from "../pages/Task-Force/TaskForce";
 import Login from "../pages/Auth/Login";
 import ResetPassword from "../pages/Auth/ResetPassword";
+import ChangePassword from "../pages/Auth/ChangePassword";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Files />} />
         <Route path="files" element={<Files />} />
