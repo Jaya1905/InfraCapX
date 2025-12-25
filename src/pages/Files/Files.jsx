@@ -193,7 +193,7 @@ const Files = () => {
                       </span>
                     ))}
                   </div>
-                  <div className="flex items-center gap-3 xs:gap-4 mt-2 text-[10px] xs:text-xs text-gray-500">
+                  <div className="flex items-center gap-3 xs:gap-4 mt-2 text-[10px] xs:text-xs text-gray-500 whitespace-nowrap">
                     <span>{file.size}</span>
                     <span>{file.modified}</span>
                     {file.shared && <span className="text-[#065e9a] font-medium">Shared</span>}
@@ -212,7 +212,7 @@ const Files = () => {
         {/* Desktop: Table Layout */}
         <div className="hidden lg:block">
           {/* Table header */}
-          <div className="grid grid-cols-[36px_40px_1fr_220px_140px_120px_160px] items-center px-3 py-2 text-xs text-gray-500 border-b border-gray-200">
+          <div className="grid grid-cols-[36px_40px_1fr_200px_180px_100px_140px] gap-4 items-center px-3 py-2 text-xs text-gray-500 border-b border-gray-200">
             <span>
               <input type="checkbox" className="w-4 h-4 accent-blue-500 cursor-pointer" />
             </span>
@@ -225,10 +225,10 @@ const Files = () => {
           </div>
 
           {/* Rows */}
-          {FILES_DATA.map((file) => (
+          {FILES_DATA.map((file, index) => (
             <div
               key={file.id}
-              className={`grid grid-cols-[36px_40px_1fr_220px_140px_120px_160px] items-center px-3 py-2 text-sm border-b cursor-pointer transition-colors ${
+              className={`grid grid-cols-[36px_40px_1fr_200px_180px_100px_140px] gap-4 items-center px-3 py-2 text-sm border-b cursor-pointer transition-colors ${
                 isSelected(file.id)
                   ? "bg-sky-100 border-l-[3px] border-l-sky-600 hover:bg-sky-200"
                   : "border-gray-100 hover:bg-gray-50"
@@ -267,7 +267,7 @@ const Files = () => {
               </span>
 
               {/* Actions */}
-              <span className="flex items-center gap-2.5">
+              <span className="flex items-center gap-4">
                 {file.shared && (
                   <span className="text-[#065e9a] text-sm cursor-pointer">Shared</span>
                 )}
@@ -277,9 +277,11 @@ const Files = () => {
                 <span className="text-gray-900 cursor-pointer">
                   <FaEllipsis size={20} />
                 </span>
-                <span className="text-[#065e9a] cursor-pointer">
-                  <HiUserAdd size={20} />
-                </span>
+                {index >= 2 && (
+                  <span className="text-[#065e9a] cursor-pointer">
+                    <HiUserAdd size={20} />
+                  </span>
+                )}
               </span>
 
               {/* Size */}
