@@ -1,41 +1,86 @@
 import { NavLink } from "react-router-dom";
-import "./Sidebar.css";
 import { GoFileDirectoryFill } from "react-icons/go";
-import { FaFile, FaUsers, FaCog } from "react-icons/fa";
+import { FaFile, FaUsers } from "react-icons/fa";
 
 const Sidebar = ({ collapsed }) => {
   return (
     <aside
-      className={`sidebar ${collapsed ? "collapsed" : ""} relative transition-all duration-300`}
+      className={`
+        ${collapsed ? "w-20" : "w-67.5"}
+        bg-[#d2e2ef]
+        border-r border-gray-200
+        pt-3
+        rounded-l-[15px]
+        transition-all duration-300
+      `}
     >
-      <ul className="menu-list">
-        <NavLink to="/files" className="menu-item">
-          <span className="menu-icon">
-            <GoFileDirectoryFill />
-          </span>
-          {!collapsed && <span className="menu-text">All files</span>}
-        </NavLink>
+      <ul className="list-none p-0 m-0">
+        <SidebarItem
+          to="/files"
+          icon={<GoFileDirectoryFill />}
+          text="All files"
+          collapsed={collapsed}
+        />
 
-        <NavLink to="/vacation-requests" className="menu-item">
-          <span className="menu-icon">🏝️</span>
-          {!collapsed && <span className="menu-text">Vacation Requests</span>}
-        </NavLink>
+        <SidebarItem
+          to="/vacation-requests"
+          icon="🏝️"
+          text="Vacation Requests"
+          collapsed={collapsed}
+        />
 
-        <NavLink to="/teams" className="menu-item">
-          <span className="menu-icon">
-            <FaUsers />
-          </span>
-          {!collapsed && <span className="menu-text">Teams</span>}
-        </NavLink>
+        <SidebarItem
+          to="/teams"
+          icon={<FaUsers />}
+          text="Teams"
+          collapsed={collapsed}
+        />
 
-        <NavLink to="/taskforce" className="menu-item">
-          <span className="menu-icon">
-            <FaFile />
-          </span>
-          {!collapsed && <span className="menu-text">Task Force</span>}
-        </NavLink>
+        <SidebarItem
+          to="/taskforce"
+          icon={<FaFile />}
+          text="Task Force"
+          collapsed={collapsed}
+        />
       </ul>
     </aside>
+  );
+};
+
+const SidebarItem = ({ to, icon, text, collapsed }) => {
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `
+        flex items-center
+        ${collapsed ? "justify-center px-2" : "gap-3 px-4"}
+        py-2.5
+        mx-2 my-0.5
+        text-sm font-medium
+        rounded-md
+        cursor-pointer
+        transition-all duration-300
+        ${
+          isActive
+            ? "bg-[#00669f] text-white"
+            : "text-gray-700 hover:bg-gray-200"
+        }
+      `
+      }
+    >
+      <span className="text-base shrink-0">{icon}</span>
+
+      <span
+        className={`
+          whitespace-nowrap
+          transition-opacity duration-300
+          ${collapsed ? "opacity-0 w-0 overflow-hidden" : "opacity-100"}
+        `}
+      >
+        {text}
+      </span>
+    </NavLink>
   );
 };
 
