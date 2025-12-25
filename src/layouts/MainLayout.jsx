@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 const MainLayout = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,11 +23,25 @@ const MainLayout = () => {
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
+    if (sidebarCollapsed) {
+      setDropdownOpen(false);
+    }
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+    if (!dropdownOpen && window.innerWidth < 1024) {
+      setSidebarCollapsed(true);
+    }
   };
 
   return (
     <div className="h-screen flex flex-col bg-[#00679f]">
-      <Header toggleSidebar={toggleSidebar} />
+      <Header
+        toggleSidebar={toggleSidebar}
+        dropdownOpen={dropdownOpen}
+        toggleDropdown={toggleDropdown}
+      />
 
       <div className="flex-1 flex overflow-hidden px-3.75 pb-3.75">
         <Sidebar collapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
