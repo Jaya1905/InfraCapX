@@ -111,19 +111,25 @@ const Header = ({ toggleSidebar, dropdownOpen, toggleDropdown }) => {
         </button>
 
         {dropdownOpen && (
-          <div className="sm:hidden absolute right-0 top-14 bg-white rounded-lg shadow-lg w-56 py-2 z-50">
-            <DropdownItem icon={<RiSearchLine />} text="Search" />
-            <DropdownItem icon={<FaFolder />} text="Files" />
-            <DropdownItem icon={<FaImage />} text="Images" />
-            <DropdownItem icon={<BiSolidZap />} text="Zap" />
-            <DropdownItem icon={<IoMdMail />} text="Mail" />
-            <DropdownItem icon={<FaHeart />} text="Favorites" />
-            <DropdownItem icon={<FaUserFriends />} text="Friends" />
-            <DropdownItem icon={<FaRegCalendar />} text="Calendar" />
-            <DropdownItem icon={<WiStars />} text="Stars" />
-            <DropdownItem icon={<IoIosNotifications />} text="Notifications" />
-            <DropdownItem icon={<MdOutlineContacts />} text="Contacts" />
-          </div>
+          <>
+            <div
+              className="sm:hidden fixed inset-x-0 top-14 bottom-0 bg-black/60 z-40"
+              onClick={toggleDropdown}
+            />
+            <div className="sm:hidden absolute right-0 top-10 bg-white rounded-lg shadow-lg w-56 py-2 z-50">
+              <DropdownItem icon={<RiSearchLine />} text="Search" />
+              <DropdownItem icon={<FaFolder />} text="Files" />
+              <DropdownItem icon={<FaImage />} text="Images" />
+              <DropdownItem icon={<BiSolidZap />} text="Zap" />
+              <DropdownItem icon={<IoMdMail />} text="Mail" />
+              <DropdownItem icon={<FaHeart />} text="Favorites" />
+              <DropdownItem icon={<FaUserFriends />} text="Friends" />
+              <DropdownItem icon={<FaRegCalendar />} text="Calendar" />
+              <DropdownItem icon={<WiStars />} text="Stars" />
+              <DropdownItem icon={<IoIosNotifications />} text="Notifications" />
+              <DropdownItem icon={<MdOutlineContacts />} text="Contacts" />
+            </div>
+          </>
         )}
       </div>
     </header>
