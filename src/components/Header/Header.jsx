@@ -13,11 +13,18 @@ import { IoSearchSharp } from "react-icons/io5";
 import { WiStars } from "react-icons/wi";
 import { BiSolidZap } from "react-icons/bi";
 import { RiSearchLine } from "react-icons/ri";
+import { HiMenu } from "react-icons/hi";
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => {
   return (
     <header className="h-14 bg-[#00679f] flex items-center justify-between px-4">
       <div className="flex items-center gap-4 sm:gap-10">
+        <button
+          onClick={toggleSidebar}
+          className="p-1 hover:bg-white/15 rounded-md transition-colors lg:hidden cursor-pointer"
+        >
+          <HiMenu color="white" size={20} />
+        </button>
         <span className="text-white text-lg font-semibold cursor-pointer">
           Logo
         </span>
